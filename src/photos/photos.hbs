@@ -1,0 +1,46 @@
+<div id="ribbon" style="background-image: url('{{headerImage}}')">
+    <div id="ribbon-inner">
+        <div id="ribbon-content">
+            <h1>
+                Mine bilder
+            </h1>
+            <p>
+                Her finner du bildene som du har tatt ved fotoveggene i våre butikker.
+            </p>
+        </div>
+    </div>
+</div>
+
+<section id="photos-page">
+    <div id="photos-centering">
+        <h1>{{title}}</h1>
+
+        <section id="photo-container">
+          <!--  photo views will be rendered here -->
+          {{#if empty}}
+          <div class="empty-filler">
+              <h2> Du har ikke lagret noen bilder tatt i butikk </h2>
+              <div class="simen-says">
+                  <div class="bubble">
+                      <p>
+                          Dra til en av våre <a>butikker med fotovegg</a> og ta profesjonelle bilder med klærne du prøver, så vil du kunne finne tilbake til bildene dine her, slik at du kan dele dem med andre, eller se på plaggene du prøvde.
+                      </p>
+                  </div>
+                  <div class="simen"></div>
+              </div>
+              <img src="http://dbfy9c5mcr8o7.cloudfront.net/client/moodsofnorway/dynamic/articles/q2-suits-ss16-mn-43627_1583.jpg"></img>
+          </div>
+          {{/if}}
+        </section>
+
+        <div class="load-more-button">
+            Last flere bilder
+        </div>
+    </div>
+</section>
+
+<div class="sharing-instructions-background">
+      <div class="sharing-instructions-box">
+            For å dele et bilde, trykk og hold på bildet, og velg deling fra menyen som kommer opp.
+      </div>
+</div>

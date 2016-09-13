@@ -1,0 +1,270 @@
+
+$moods-font: Century Gothic;
+$moods-pink: #EE2A7B;
+$moods-light-pink: #FF8FCC;
+$moods-dark-gray: #454142;
+$moods-light-gray: #EBEEF2;
+
+$square-side: 20px;
+
+#membership-content{
+    display: flex;
+    justify-content: center;
+    #membership-centering{
+        max-width: 1000px;
+        padding-top: 20px;
+        @media (max-width: 500px) {
+          padding-top: 40px;
+          max-width: 100%;
+        }
+    }
+
+    h2 {
+      margin-top: 3rem;
+    }
+    h2.achievments_header {
+      margin-bottom: 0;
+    }
+}
+
+h2{
+    @media (max-width: 1020px) {
+      margin-left: 10px;
+    }
+}
+table {
+  width: 100%;
+  border: none;
+  text-align: left;
+  ul{
+      padding-left: 10px;
+  }
+}
+th{
+  padding: 10px;
+  word-wrap: break-word;
+}
+th.text{
+  vertical-align: top;
+  @media (max-width: 400px) {
+      font-size: 13px;
+  }
+}
+li{
+  font-weight: normal;
+  font-size: 90%;
+}
+th.icons{
+  vertical-align: center;
+  text-align: center;
+  @media (max-width: 400px) {
+      font-size: 12px;
+    img{
+
+    }
+  }
+}
+.leftcoloumn{
+    word-wrap: break-word;
+    @media (max-width: 400px) {
+        font-size: 13px;
+    }
+}
+
+.view{
+    h3{
+        padding: 20px;
+        margin: 0;
+    }
+    .description{
+        padding: 20px;
+    }
+}
+
+.konge {
+  background: #EB007E;
+  color: white;
+
+  position: relative;
+
+}
+html{
+  width: 100%;
+  height: 100%;
+
+}
+.insider{
+  background: #6A6768;
+  color: white;
+  width: 100%;
+  position: relative;
+
+}
+.amba{
+  background: #5B778F;
+  color: white;
+  position: relative;
+}
+.bottom{
+  background: $moods-light-gray;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.description{
+  width: 60%;
+}
+figure{
+  text-align: center;
+
+
+}
+figure.fig{
+  width: 33%;
+  @media (max-width: 400px) {
+    width: 50%;
+  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 20px;
+}
+figcaption{
+  font-size: 75%;
+  font-weight: bold;
+  text-align: center;
+
+
+}
+#head{
+
+}
+#header{
+  position: relative;
+
+}
+
+#headerback{
+  width: 100%;
+  height: auto;
+}
+
+
+
+.info{
+  display:flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.container{
+  display:flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+
+}
+
+
+.bottomchild{
+  text-align: center;
+  padding-top: 20px;
+  width: 50%;
+}
+#points{
+  font-weight: bold;
+  padding: 5px 0 20px;
+}
+#insiderIcon{
+  position: absolute;
+  right: 3%;
+  top: -4rem;
+  width: 6rem;
+  height: 10rem;
+}
+#bigicon{
+  position: absolute;
+  right: 3%;
+  top: -4rem;
+  width: 7rem;
+  height: 10rem;
+  &.special-icon{
+      width: 10rem;
+      height: 9rem;
+  }
+}
+.super{
+  height: 40px;
+  width: 40px;
+}
+#wrapper{
+  position: relative;
+}
+h2{
+  position:relative;
+}
+
+.view{
+  padding-top: 80px;
+  width: 100%;
+}
+
+#ribbon.membership-ribbon{
+    min-height: 300px;
+    height: auto;
+  position: relative;
+  background: url('/media/header.png');
+  background-position: -350px -200px;
+  @media (max-width: 600px) {
+    background-position: -750px -270px;
+    text-align: center;
+  }
+  #figlogo{
+    position: absolute;
+    right:5%;
+    top:75%;
+  }
+  #titlelogo{
+    width: 100%;
+    max-width: 90px;
+  }
+  #ribbon-inner{
+    background:rgba(235,238,242,0.7);
+    #ribbon-content{
+      font-style: normal;
+      .avatar-container{
+          @media (max-width: 600px) {
+            display: block;
+            float: left;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+          }
+          #avatar{
+            display: block;
+            float:left;
+            margin-right: 20px;
+            border-radius: 1000px;
+            height: 120px;
+            @media (max-width: 600px) {
+                width: 60px;
+                height: 60px;
+            }
+          }
+      }
+      h1{
+        text-transform: none;
+        @media (max-width: 420px) {
+          font-size: 1.8em;
+        }
+      }
+      #bob{
+        font-size: 1.1em;
+        font-weight: lighter;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

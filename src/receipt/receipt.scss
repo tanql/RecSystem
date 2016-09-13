@@ -1,0 +1,488 @@
+@import "../index.scss";
+@import '../common_styles/empty-filler';
+@import '../common_styles/ribbon';
+
+/*--Variables for Receipt.view--*/
+$receipt-table: 18em;
+$receipt-exit: 17em;
+$summary-width: 30em;
+$receipt-table-medium: 17em;
+$receipt-exit-medium: 16em;
+$receipt-width-medium: 25em;
+$receipt-table-small: 15em;
+$receipt-exit-small: 14.5em;
+$summary-width-small: 20em;
+
+/* ---------- Receipts.view -------------
+----  ------- */
+#receipt_header{
+  width: 100%;
+  height: 300px;
+  padding: 3rem 5em;
+  @media (max-width: 41rem) {
+    padding: 3rem 0;
+  }
+  box-sizing: border-box;
+  #header_inner{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0 4rem;
+    background-color: $overlay-opaque-grey;
+    display: flex;
+    justify-content: center;
+    @media (max-width: 41rem) {
+      padding: 0 1rem;
+    }
+    #header_content{
+      box-sizing: border-box;
+      width: 800px;
+      max-width: 100%;
+      padding: 2.5rem 0;
+      @media (max-width: 41rem) {
+        padding: 1rem 0;
+      }
+      h1{
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: lighter;
+        font-size: 2.5em;
+        @media (max-width: 41rem) {
+          margin-bottom: -.3em;
+        }
+      }
+      p{
+        @media (min-width: 25rem) {
+          width: 22em;
+        }
+      }
+    }
+  }
+}
+
+.receipt_vw {
+  margin-top: 3rem;
+  margin-left: 5rem;
+  @media (max-width: 41rem) {
+    margin-left: 0.5rem;
+  }
+  .empty-filler{
+      margin-right: 5rem;
+      @media (max-width: 41rem) {
+        margin-right: 0.5rem;
+      }
+  }
+}
+/* ---------- Receipt.view -------------
+----  ------- */
+
+.receipt_title {
+  font-weight: bold;
+}
+
+.receipt_summary {
+  margin-left: 2em;
+  width: $summary-width;
+  margin-bottom: 1em;
+
+  .container_summary_title {
+    padding-bottom: 1em;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -webkit-flex-flow: wrap;
+    justify-content: space-between;
+    text-align: center;
+    .title_date {
+      flex: 1;
+      order: 1;
+      text-align: left;
+    }
+    .title_store {
+      flex: 2;
+      order: 2;
+    }
+    .title_amount {
+      flex: 1;
+      order: 3;
+      text-decoration: underline;
+    }
+    .title_amount_small {
+      flex: 1;
+      order: 3;
+      display: none;
+    }
+    .title_price {
+      flex: 1;
+      order: 4;
+      margin-right: 1.5em;
+      text-align: left;
+    }
+    .title_price_small{
+      flex: 1;
+      order: 4;
+      display: none;
+    }
+  }
+  .product_line {
+    padding-bottom: 1em;
+    margin-left: 2em;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -webkit-flex-flow: wrap;
+    justify-content: space-around;
+
+    .description {
+      flex: 2.8;
+      order: 1;
+    }
+    .quantity {
+      flex: 1;
+      order: 2;
+      text-align: center;
+    }
+    .price {
+      flex: 1;
+      order: 3;
+      text-align: left;
+      margin-right: 1.7em;
+    }
+    .price_small {
+      display: none;
+      flex: 1;
+      order: 3;
+      text-align: left;
+    }
+  }
+  .open_modal {
+    text-align: right;
+    margin-right: 1em;
+  }
+}
+
+.receipt {
+  font-size: 0.9em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99999;
+  opacity:0;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+  &:target {
+    opacity:1;
+    pointer-events: auto;
+  }
+  > div {
+    position: relative;
+    margin: 15% auto;
+    padding: 1em 1.5em 0.8em 1.5em;
+  }
+  .exit {
+    position: absolute;
+    margin-left: $receipt-exit;
+    text-decoration: none;
+    font-weight: bold;
+    &:hover { background: $moods-grey4; }
+  }
+}
+
+.receipt_table {
+  width: $receipt-table;
+  overflow: auto;
+  position: relative;
+  float: right;
+  margin-right: 50rem;
+  left: 0;
+  -moz-box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  color: $moods-grey1;
+  background-color: white;
+}
+
+.receipt_header {
+  text-align: center;
+  padding-top: 0.8em;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+.receipt_body{
+    border-bottom: 1px dashed $moods-grey1;
+
+  .label_line {
+    border-bottom: 1px dashed $moods-grey1;
+  }
+  .product_line {
+    padding: 0.2em;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -webkit-flex-flow: wrap;
+    justify-content: space-around;
+    .quantity {
+      order: 1;
+      flex: 1;
+      margin-top: 0.8em;
+    }
+    .description {
+      flex: 6;
+      order: 2;
+      margin-top: 0.8em;
+    }
+    .price {
+      order: 3;
+      flex: 1;
+      margin-right: 0em;
+      margin-top: 0.8em;
+    }
+    .discount_price {
+      text-align: right;
+      margin-top: 0em;
+    }
+    .discount {
+      text-align: right;
+      margin-left: 4em;
+    }
+    .original_price {
+      margin-left: -2em;
+    }
+    .left{
+      margin-right: 1em;
+      text-align: right;
+      order: 2;
+      flex: 1;
+    }
+  }
+}
+
+.receipt_footer {
+  .print_button {
+    padding: 0.3em 0 0.5em;
+    width: 11em;
+    text-align: center;
+    background-color: $moods-pink3;
+    border-radius: 1em 1em 1em 1em;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-weight: bold;
+    &:hover {
+      cursor:pointer;
+      background-color: $moods-pink2;
+    }
+  }
+
+  .label {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -webkit-flex-flow: wrap;
+    justify-content: space-around;
+
+    .right{
+      margin-top: 0.6em;
+      order: 1;
+      text-align: left;
+      flex: 1.2;
+    }
+
+    .left{
+      margin-top: 0.6em;
+      text-align: right;
+      order: 2;
+      flex: 1;
+    }
+  }
+  .end_note {
+    margin-top: 0.6em;
+    font-size: 0.8em;
+  }
+}
+
+/* ---------- MEDIA QUERY -------------
+---- Small Screen adjustment -------*/
+@media only screen and (max-width: 41rem) {
+  .receipt_vw {
+    margin-top: 2rem;
+  }
+  /*--------------- For each receipt -----------*/
+  .receipt {
+    background: $overlay-opaque-black;
+    .exit {
+    margin-left: $receipt-exit-small;
+  }
+    .label {
+      font-size: 0.8em;
+    }
+  }
+
+  .receipt_summary {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    width: inherit;
+
+    .container_summary_title {
+      -webkit-flex-direction: row;
+      .title_date {
+        flex: 2.8;
+      }
+      .title_store {
+        display: none;
+      }
+      .title_amount {
+        display: none;
+      }
+      .title_amount_small {
+        display: flex;
+      }
+      .title_price {
+        display: none;
+      }
+      .title_price_small {
+        display: flex;
+      }
+    }
+    .product_line {
+      margin-left: 0;
+      .quantity {
+        text-align: left;
+      }
+      .price {
+        display: none;
+      }
+      .price_small {
+        display: flex;
+      }
+    }
+  }
+    .receipt_table {
+      width: $receipt-table-small;
+      float: none;
+    }
+
+  .receipt_body {
+    .product_line {
+      .discount {
+        margin-left: 2.1em;
+      }
+      .original_price {
+        margin-left: 1em;
+      }
+    }
+  }
+    .receipt_image {
+      margin-top: 0.5em;
+      margin-left: -1em;
+  }
+}
+/* ---------- MEDIA QUERY -------------
+---- Medium Screen adjustments ------- */
+@media only screen and (min-width: 41rem) and (max-width: 59rem) {
+  .receipt_vw {
+    margin-top: 2rem;
+  }
+  .receipt {
+    background: $overlay-opaque-black;
+  }
+  .receipt_table {
+    width: $receipt-table-medium;
+    float: none;
+  }
+  .receipt {
+    .exit {
+      margin-left: $receipt-exit-medium;
+    }
+    .label {
+      font-size: 0.8em;
+    }
+  }
+  .receipt_body {
+    .product_line {
+      .discount {
+        margin-left: 3.5em;
+      }
+      .original_price {
+        margin-left: -1em;
+      }
+    }
+  }
+}
+/* ---------- MEDIA QUERY -------------
+---- Medium Screen adjustments ------- */
+@media only screen and (min-width: 59rem) and (max-width: 65rem) {
+  .receipt_table {
+    width: $receipt-table-medium;
+  }
+  .receipt {
+    > div {
+      margin-right: 2rem;
+    }
+    .exit {
+      margin-left: $receipt-exit-medium;
+    }
+    .label {
+      font-size: 0.8em;
+    }
+  }
+}
+/* ----- MEDIA QUERY ------------------
+------- Larger screen adjustment ----- */
+@media only screen and (min-width: 65rem) {
+  .receipt {
+    > div {
+      margin-right: 4.5rem;
+    }
+  }
+  .receipt_table {
+    float: right;
+    padding-right: 10em;
+  }
+}
+
+/* ----- MEDIA PRINT QUERY ------------
+------- Printing a receipt ----- */
+@media print {
+  #receipt_banner * {
+    display: none;
+  }
+  #receipt_body {
+    display: none;
+  }
+  #profile_hamburger *{
+    display: none;
+  }
+  .receipt_summary * {
+    display: none;
+  }
+  .receipt_table {
+    float: left;
+  }
+  .receipt {
+    > div {
+      margin-top: 10em;
+    }
+    .exit {
+      display: none;
+    }
+  }
+}

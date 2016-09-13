@@ -1,0 +1,378 @@
+@import "../index.scss";
+
+$square-side: 20px;
+
+.fb-connect {
+  padding: 1rem;
+  margin-top: 3rem;
+  background: $moods-pink3;
+}
+
+#profile-ribbon {
+  height: 200px;
+  background: url(../../build/public/images/bannerFlowers.jpg) no-repeat center top;
+  background-size: cover;
+  position: relative;
+  #subribbon {
+    position: absolute;
+    background-color: rgba(235, 238, 242, 0.9); //moods light gray, set opacity
+    height: 140px;
+    left: 80px;
+    right: 80px;
+    top: 15%;
+    #circleOnTop {
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+      margin-left: 20px;
+      margin-top: 20px;
+      //background: url(../../build/public/images/skjeggemannen.jpg);
+      background-size: cover;
+      display: block;
+    }
+    #tractorOnTop {
+      position: absolute;
+      height: 140px;
+      width: 140px;
+      border-radius: 70px;
+      -webkit-border-radius: 70px;
+      -moz-border-radius: 70px;
+      margin-top: 100px;
+      background-size: cover;
+      right: 15%;
+    }
+    .nameOnRibbon {
+      display: inline-block;
+    }
+    #personName {
+      margin: 40px 0 0 140px;
+      float: left;
+      max-height: 50px;
+      font-size: 40px;
+    }
+  }
+}
+
+.userShow {
+  font-size: large;
+  padding: 20px;
+  position: relative;
+  .edit-profile-link {
+    position: absolute;
+    right: 50px;
+    #profileEditButton {
+      width: 150%;
+      height: 150%;
+      max-width: 40px;
+      min-width: 40px;
+    }
+  }
+  .disp {
+    padding: 15px 10px 10px;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    box-shadow: 0 7px 6px -6px $background-grey;
+    .imageContainer {
+      width: 25%;
+    }
+  }
+  #displayName, #displayUsername {
+    margin-top: 60px;
+  }
+  #displayEmail {
+    word-wrap: break-word;
+  }
+  #displayInterests {
+    padding-bottom: 15px;
+  }
+}
+
+///COMMON FOR BOTH VIEW AND EDITVIEW
+.iconClass {
+  display: inline-block;
+  width: 23px;
+  padding-left: 2px;
+  img {
+    width: $square-side;
+    height: $square-side;
+    vertical-align: middle;
+    margin-bottom: 3px;
+  }
+}
+
+#intSpan {
+  width: 99%;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.isFalse {
+  filter: grayscale(100%) contrast(30%) brightness(150%);
+}
+
+.imageContainer, .intDiv {
+  display: block;
+  float: left;
+  padding: 7px 10px;
+  box-sizing: border-box;
+  vertical-align: top;
+  text-align: center;
+}
+
+.intImage {
+  float: left;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.imgText {
+  display: block;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+///END COMMON
+
+.userEdit {
+  font-size: large;
+  padding: 20px;
+  .editStuff {
+    padding: 5px;
+    input {
+      padding-left: 2px;
+      font-size: large;
+      width: 352px;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+    }
+    .user-birthday {
+      width: 60px;
+    }
+    ::-webkit-input-placeholder:-moz-placeholder::-moz-placeholder:-ms-input-placeholder {
+      color: $moods-grey1;
+    }
+    .intDiv {
+      width: 200px;
+      .intImage {
+        cursor: pointer;
+      }
+    }
+  }
+  #lastLine {
+    display: block;
+    clear: both;
+  }
+  .exit-editing-link, input[type=submit] {
+    margin: 10px 10px 10px 10px;
+    border-radius: 2em;
+    background: $moods-pink2;
+    color: white;
+    font-size: large;
+    border: none;
+    width: 200px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    outline: none;
+    line-height: 40px;
+  }
+  input[type=submit]:hover {
+    cursor: pointer;
+  }
+}
+input.invalid {
+    background: $moods-pink2;
+}
+
+/* ---------- MEDIA QUERY -------------
+----------------- Adjustment ------- */
+@media only screen and (min-width: 600px) and (max-width: 920px) {
+  #profile-ribbon {
+    #subribbon {
+      #tractorOnTop {
+        height: 100px;
+        width: 100px;
+        border-radius: 50px;
+        -webkit-border-radius: 50px;
+        -moz-border-radius: 50px;
+        top: 20px;
+        left: 75%;
+      }
+      #personName {
+        max-height: 40px;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .userShow {
+    .edit-profile-link {
+      top: 13px;
+      right: 30px;
+      #profileEditButton {
+        max-width: 40px;
+        min-width: 40px;
+      }
+    }
+    .disp {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      .imageContainer{
+        width: 25%;
+      }
+    }
+    #displayName {
+      margin-top: 20px;
+      //height: 70px;
+    }
+    #displayUsername {
+      margin-top: 0;
+    }
+  }
+
+  .userEdit {
+    .editStuff {
+      .intDiv {
+        //width: 120px;
+        width: 20%;
+      }
+    }
+  }
+}
+
+
+/* ---------- MEDIA QUERY -------------
+---- Small Screen adjustment ------- */
+@media only screen and (max-width: 600px) {
+  #profile-ribbon {
+    text-align: center;
+    height: 200px;
+    margin-bottom: -5px;
+    #subribbon {
+      height: 170px;
+      left: 20px;
+      right: 20px;
+      top: 15px;
+      #circleOnTop {
+        height: 70px;
+        width: 70px;
+        border-radius: 35px;
+        -webkit-border-radius: 35px;
+        -moz-border-radius: 35px;
+        position: absolute;
+        left: 0; right:0; top: 30px;
+        margin: auto;
+      }
+      #tractorOnTop {
+        height: 80px;
+        width: 80px;
+        border-radius: 40px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 40px;
+        top: 45px;
+        right: 30px;
+        @media only screen and (max-width: 460px){
+          height: 60px;
+          width: 60px;
+          border-radius: 30px;
+          -webkit-border-radius: 30px;
+          -moz-border-radius: 30px;
+          top: 55px;
+        }
+      }
+      #personName {
+        width: 90%;
+        margin-top: 110px;
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 22px;
+        @media only screen and (max-width: 600px) {
+          margin-top: 105px;
+        }
+      }
+    }
+  }
+
+  .userShow {
+    font-size: 16px;
+    padding: 0;
+    .edit-profile-link {
+      margin: 15px 0;
+      right: 12px;
+      top: -8px;
+      @media only screen and (max-width: 460px){
+        top: -6px;
+        right: 18px;
+      }
+      #profileEditButton {
+        max-width: 40px;
+        min-width: 40px;
+        @media only screen and (max-width: 460px){
+          height: 130%;
+          width: 130%;
+          max-width: 30px;
+          min-width: 30px;
+        }
+      }
+    }
+    .disp {
+      display: block;
+      width: 100%;
+      overflow: auto;
+      .imageContainer{
+        width: 50%;
+      }
+    }
+    #displayName {
+      margin-top: 25px;
+    }
+    #displayUsername {
+      margin-top: 0;
+    }
+  }
+
+  .userEdit {
+    margin-top: 40px;
+    @media only screen and (max-width: 460px){
+      margin-top: 25px;
+    }
+    .editStuff {
+      font-size: 15px;
+      .iconClass {
+        width: 30px;
+        float:left;
+      }
+      input {
+        font-size: 15px;
+      }
+      #user-name, #user-username, #user-email, #user-postCode {
+        width: calc(100% - 40px);
+        overflow: hidden;
+      }
+      .intDiv {
+        width: 50%;
+      }
+    }
+    .user-birthday {
+      width: 60px;
+    }
+    div {
+      text {
+        font-size: 15px;
+      }
+    }
+    input[type=submit], .exit-editing-link {
+      font-size: 15px;
+      width: 40%;
+    }
+  }
+}

@@ -1,0 +1,211 @@
+@import "../index.scss";
+
+/* ----------- THE MENU -------------
+---- contains menuhead, hamburger -------- */
+
+.menuhead {
+  background-color: white;
+  padding: 0.625em;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  img {
+    align-self: center;
+    height: 1.5em;
+    width: auto;
+    /* Top Right Bottom Left */
+    margin: 0.6125em 1em 0.6125em 0.6125em;
+    z-index: 2;
+  }
+  #profile_hamburger {
+    display: flex;
+    flex-direction: row;
+    #profile_pic {
+      display: flex;
+      height: 1.8em;
+      width: 1.8em;
+      background-size: cover;
+      border: $moods-gray solid 2px;
+      border-radius: 100%;
+    }
+  }
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+/* -------------- HAMBURGER -------------
+---------------------------------------- */
+
+/* Hamburger button */
+#hamburger {
+  display: flex;
+  flex-direction: column;
+  /* Top Right Bottom Left */
+  margin: -0.2em 0 0 1em;
+  cursor: pointer;
+  height: 1.6em;
+  width: 1.6em;
+  padding: 0.3em;
+  background: white;
+  z-index: 3;
+  /* Stripes in Hamburger button */
+  div {
+    background-color: $moods-gray;
+    border: 1px solid $moods-gray;
+    border-radius: 0.1em;
+    height: 0.125em;
+    margin-top: 0.2em;
+    width: 90%;
+  }
+}
+
+.menu {
+  align-items: center;
+  ul {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style-type: none;
+    font-size: 1.2em;
+    padding: 0.2em 0 0.2em 0;
+    height: 2em;
+    a {
+      color: $moods-gray;
+      text-decoration: none;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      float: right;
+      padding: 1em;
+    }
+  }
+}
+
+#profile_pic {
+  background: url(../../build/public/images/skjeggemannen.jpg);
+  background-size: cover;
+}
+
+/* ---------- MEDIA QUERY -------------
+---- Small Screen adjustment ------- */
+
+@media only screen and (max-width: 53rem) {
+
+  .menu {
+    left: 0;
+    display: none;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    z-index: 2;
+  }
+
+  .menuhead {
+    box-sizing: border-box;
+    #large_logo {
+      display: none;
+    }
+    div {
+      flex-direction: column-reverse;
+      align-self: flex-end;
+      width: 100%;
+    }
+    .menu {
+      width: 100%;
+      border: $moods-grey2 dashed 2px;
+      background: $moods-grey4;
+      margin-top: 0.5em;
+      li a {
+        width: 100%;
+        text-align: right;
+      }
+    }
+  }
+  #profile_hamburger {
+    width: auto;
+    float: right;
+    margin: -2.3em 0em 0.6em 0;
+  }
+}
+
+/* ---------- MEDIA QUERY -------------
+---- Medium Screen adjustment ------- */
+
+@media only screen and (min-width: 53rem) and (max-width: 65rem) {
+  .menuhead {
+    flex-direction: row;
+    height: 3em;
+    #large_logo {
+      display: none;
+    }
+    div {
+      margin: 0 0 0 auto;
+      flex-direction: row;
+    }
+  }
+  .menu {
+    display: flex;
+    flex-direction: row;
+    /* Top Right Bottom Left*/
+    margin: 0 1em 0.6em auto;
+    z-index: 2;
+  }
+  #hamburger {
+    display: none;
+    div {
+      display: none;
+    }
+  }
+  #profile_hamburger {
+    align-self: flex-end;
+    justify-self: right;
+    width: 4em;
+    margin: 0 0 0.6em auto;
+    #profile_pic {
+      margin: -0.8em 1.5em 0 0;
+    }
+  }
+}
+
+
+/* ----- MEDIA QUERY ------------------
+------- Larger screen adjustment ----- */
+@media only screen and (min-width: 65rem) {
+  .menuhead {
+    flex-direction: row;
+    height: 3em;
+    div {
+      margin: 0 0 0 auto;
+      flex-direction: row;
+    }
+  }
+  .menu {
+    display: flex;
+    flex-direction: row;
+    /* Top Right Bottom Left*/
+    margin: 0 1em 0.6em auto;
+    z-index: 2;
+  }
+  #hamburger {
+    display: none;
+    div {
+      display: none;
+    }
+  }
+  #profile_hamburger {
+    align-self: flex-end;
+    justify-self: right;
+    margin: 0 0 0.6em auto;
+    width: 4em;
+    #profile_pic {
+      margin: -0.8em 1.5em 0 0;
+    }
+  }
+}

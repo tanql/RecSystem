@@ -1,0 +1,35 @@
+/* ------ DENIED LOGIN -------
+----------------------------- */
+
+@import "../index.scss";
+
+#login_error {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  background-color: $moods-grey4;
+  z-index: 3;
+  border-radius: 2em;
+  padding: 1em;
+  h2 {
+    display: flex;
+    align-self: center;
+    justify-self: center;
+  }
+  a {
+    padding: 0.5em 1em 0.5em 1em;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover {
+      background: $moods-pink3;
+      border-radius: 1em;
+    }
+  }
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}

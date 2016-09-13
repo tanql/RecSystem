@@ -1,0 +1,59 @@
+<div id="profile-ribbon">
+    <div id="subribbon">
+        <div id="circleOnTop" style="background-image: url({{profileImage}})"></div>
+        <span class="nameOnRibbon" id="personName">{{firstName}}
+            <span id="ribbonLastName"> {{lastName}}</span>
+        </span>
+        {{!-- <div id="tractorOnTop" style="background-image: url({{membershipImage}})"></div> --}}
+    </div>
+</div>
+
+<form class="userShow">
+    <a class="edit-profile-link" href="#0"><img src="public/icons/Edit.svg" id="profileEditButton"></a><br>
+
+    {{#unless facebookUserId}}
+      <div class="fb-connect">
+        <p>
+          Ønsker du å koble denne kontoen til din Facebook konto?
+          <a id="fb-connect-link" href="#0">
+            Klikk her
+          </a>
+        </p>
+      </div>
+   {{/unless}}
+   {{#if message}}
+    <p>
+      {{message}}
+    </p>
+   {{/if}}
+
+    <div class="disp" id="displayName">
+        <span class="iconClass"><img src="public/icons/Person.svg"></span> <text>{{name}}</text>
+    </div>
+
+    <div class="disp" id="displayUsername">
+        <span class="iconClass"><img src="public/icons/Mobile.svg"></span> <text>{{username}}</text>
+    </div>
+
+    <div class="disp" id="displayEmail">
+        <span class="iconClass"><img src="public/icons/Mail.svg"></span> <text>{{email}}</text>
+    </div>
+
+    <div class="disp">
+        <span class="iconClass"><img src="public/icons/Post.svg"></span> <text>{{postCode}}</text>
+    </div>
+
+    <div class="disp">
+        <span class="iconClass"><img src="public/icons/Birthday.svg"></span> <text>{{birthdayFormatted}}</text>
+    </div>
+
+    <div class="disp" id="displayInterests">
+        <span class="iconClass" id="intSpan"><img src="public/icons/Int.svg">Interesser:</span>
+        <div class="imageContainer"><img id="img-herre" class="intImage" src="public/images/interestsimages/moods-herre.jpg"><span class="imgText">Herre</span></div>
+        <div class="imageContainer"><img id="img-kvinne" class="intImage" src="public/images/interestsimages/moods-kvinne.jpg"><span class="imgText">Kvinne</span></div>
+        <div class="imageContainer"><img id="img-kids" class="intImage" src="public/images/interestsimages/moods-kids.jpg"><span class="imgText">Kids</span></div>
+        <div class="imageContainer"><img id="img-sport" class="intImage" src="public/images/interestsimages/moods-sport.jpg"><span class="imgText">Sport</span></div>
+    </div>
+
+
+</form>

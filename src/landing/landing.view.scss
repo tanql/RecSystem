@@ -1,0 +1,221 @@
+/*-------------- LANDING PAGE -----------
+ -----------------------------------------*/
+
+@import "../index.scss";
+
+#landing {
+  display: flex;
+  flex-direction: column;
+
+  #item_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .background img {
+    position: fixed;
+  }
+  .item {
+    ul h3, p {
+      color: white;
+      text-shadow: black 0 0 0.5em;
+    }
+    ul li {
+      color: #EC008C
+    }
+    img {
+      display: inherit;
+      float: left;
+      align-self: center;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* Media query for scroll button */
+
+@media only screen and (max-width: 65em) {
+  #landing {
+    #show_benefits {
+      display: none;
+    }
+  }
+}
+
+/* SMALL SCREENS */
+
+@media only screen and (max-width: 35em) {
+
+  #landing {
+
+    .background {
+      height: auto;
+      video {
+        display: none;
+      }
+      #canvas {
+        display: flex;
+        opacity: 1;
+        z-index: 0;
+        height: 100vh;
+      }
+    }
+    #logo_container {
+      display: flex;
+      justify-content: center;;
+      align-content: center;
+      margin: 4em 0 3em 0;
+      z-index: 1;
+      #logo_large {
+        min-height: 2.5em;
+      }
+      #mutebtn {
+        display: none;
+      }
+    }
+
+    #buttons {
+      z-index: 1;
+      #button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $moods-pink3;
+        border-radius: 3em;
+        height: 2em;
+        margin: 2em;
+        padding: 2em;
+        text-transform: uppercase;
+        color: black;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+
+    #item_container {
+      z-index: 1;
+      .item {
+        width: 90%;
+        margin: 0.5em;
+      }
+    }
+  }
+}
+
+/* LARGE SCREENS */
+
+@media only screen and (min-width: 35em) {
+
+  #landing {
+    background-color: black;
+    min-height: 300vw;
+    @media only screen and (min-width: 65em) {
+      .next-button {
+        display: block;
+        position: absolute;
+        margin: 20% 0 0 0;
+        font-size: 1em;
+        left: 50%;
+        transform: scale(8, 2);
+        opacity: 0.7;
+        color: $moods-grey2;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+    .background {
+      width: 100%;
+      position: fixed;
+      #canvas {
+        opacity: 0;
+        height: 200%;
+      }
+      #video {
+        video {
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          left: 0;
+          right: 0;
+          opacity: 0.7;
+        }
+      }
+    }
+
+
+    #logo_container {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      height: 18em;
+      z-index: 3;
+      #logo_large {
+        max-width: 75vw;
+        height: 10em;
+        align-self: flex-end;
+      }
+      #mutebtn {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2em;
+        width: 2em;
+        padding: 0.3em;
+        margin: 0.4em;
+        opacity: 0.6;
+        cursor: pointer;
+        &:hover {
+          opacity: 1;
+          border: none;
+        }
+      }
+    }
+
+    #buttons {
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      #button {
+        display: flex;
+        text-transform: uppercase;
+        color: white;
+        text-decoration: none;
+        align-self: center;
+        justify-content: center;
+        border: $moods-pink1 solid;
+        width: 15em;
+        z-index: 3;
+        border-radius: 2.2em;
+        &:hover {
+          color: black;
+          background-color: $moods-pink3;
+          border: $moods-pink3 solid;
+        }
+        &:first-child {
+          margin-right: 0.5em;
+        }
+      }
+    }
+    #item_container {
+      @media only screen and (min-width: 110vh) {
+        transform: translate(0, 20%);
+      }
+      @media only screen and (max-width: 110vh) and (min-width: 90vh) {
+        transform: translate(0, 13%);
+      }
+      @media only screen and (max-width: 90vh) {
+        transform: translate(0, 0);
+      }
+      z-index: 1;
+      .item {
+        width: 40%;
+        padding: 2em 1em 2em 1em;
+      }
+    }
+  }
+}
+

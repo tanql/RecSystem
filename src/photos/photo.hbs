@@ -1,0 +1,45 @@
+<div class="photo-and-details">
+    <img src="{{name}}">
+    <div class="prev-button">
+        &#9650;
+    </div>
+    <div class="next-button">
+        &#9660;
+    </div>
+    <div class="photo-controls-bar">
+        <div class="garment-counter">
+            {{#if garment_count}}
+                <div class="changing-words">
+                    <span class="show-garments">Vis&nbsp;</span>
+                    <span class="hide-garments">Skjul&nbsp;</span>
+                    <span class="dummy-word">Skjul&nbsp;</span>
+                </div>
+                plagg ({{garment_count}})
+                <span class="arrow flip-back">&#9660;</span>
+            {{else}}
+                Ingen plagg registrert
+            {{/if}}
+        </div>
+        <div class="actions">
+            <div class="fullscreen-button material-icons">
+                fullscreen
+            </div>
+            <div class="fullscreen-button hidden material-icons">
+                fullscreen_exit
+            </div>
+            <a download="test" href="{{name}}"> <div class="material-icons">file_download</div> </a>
+        </div>
+    </div>
+    <div class="details">
+        <span> {{store}} </span>
+        <span> Tatt {{dateFormatted}} </span>
+    </div>
+</div>
+<div class="garments-container-outer">
+    <div class="garments-container">
+        <div class="loader">
+
+        </div>
+        <!-- garment views will be rendered here -->
+    </div>
+</div>
