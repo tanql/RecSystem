@@ -5,7 +5,6 @@ var Backbone = require('backbone');
 var moment = require('moment');
 var _ = require('underscore');
 
-var defaultUserImage = require('../media/skjeggemannen.jpg');
 
 var UserModel = Backbone.Model.extend({
 
@@ -40,7 +39,7 @@ var UserModel = Backbone.Model.extend({
         username: '',
         title: 'Happy Camper',
         email: '',
-        image: defaultUserImage,
+
         postCode: '',
         dateOfBirthDay: '',
         dateOfBirthMonth: '',

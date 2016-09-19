@@ -46,6 +46,13 @@ var LoginView = Backbone.View.extend({
         fbLogin.initFacebookLogin('login_view');
         return this;
     },
+    fetchAndRender: function () {
+        this.model.url = "/api/profile/" + this.model.id;
+        return this.model.fetch()
+            .done(() => {
+                this.render();
+});
+},
 
     onLogin: function (e) {
         e.preventDefault();
@@ -65,6 +72,7 @@ var LoginView = Backbone.View.extend({
                 }
             })
             .done((response) => {
+                console.log.
                 this.onLoginSuccess(response);
             });
     },

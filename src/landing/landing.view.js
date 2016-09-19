@@ -13,6 +13,8 @@ var LandingView = Backbone.View.extend({
     initialize: function () {
 
         var view = this;
+        this.model = require('../user.model');
+
         this.viewportHeight = $(window).height();
         this.videoHeight = $('#video').height();
         this.scrollOffset = $(document).scrollTop();
@@ -82,8 +84,17 @@ var LandingView = Backbone.View.extend({
     },
 
     render: function () {
-        this.$el.html(this.template());
-        this.$('#vidplayer').prop('muted', !this.mq.matches); // sound off on small device
+        this.model.url = "/api/users/";
+        this.model.fetch().
+            done(() => {
+            console.log(this.model.toJSON())
+            this.$el.html(this.template());
+            this.$('#vidplayer').prop('muted', !this.mq.matches); // sound off on small device
+
+
+
+    });
+
     }
 
 });

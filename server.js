@@ -19,8 +19,6 @@ nconf.argv()
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var User   = require('./config/user'); // get our mongoose model
-var Garments = require('./src/photos/garments.schema');
-var Receipt = require('./src/receipt/receipt.schemas');
 var Vote = require('./src/vote/vote.schema');
 var _ = require('underscore');
 
@@ -35,7 +33,6 @@ app.use(passport.initialize());
 var isStartEvent = process.env.npm_lifecycle_event === 'start';
 var fallbackPort = isStartEvent ? 8080 : 3000;
 var port = (process.env.PORT || fallbackPort);
-mongoose.connect(nconf.get('MONGODB_URI')); // connect to database
 
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -369,6 +366,19 @@ apiRoutes.post('/vote', function (req,res) {
     })
 
 });
+
+apiRoutes.get('/user/', function (req,res) {
+    console.log("her1")
+    Vote.update({_id:req.body._id},req.body, function (err,vote) {
+        if (err){
+            return res.sendStatus(500);
+
+        }
+
+        res.json(vote)
+    })
+
+});
 apiRoutes.put('/vote', function (req,res) {
     console.log("22222")
     Vote.update({_id:req.body._id},req.body, function (err,vote) {
@@ -383,8 +393,7 @@ apiRoutes.put('/vote', function (req,res) {
 });
 app.use('/api', apiRoutes);
 
-var data = fs.readFileSync('./src/database/ml-100k/u.data').toString().split(/[\s,\n]+/);
-var ratings = {};
+
 
 
 

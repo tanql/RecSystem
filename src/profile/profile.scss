@@ -10,7 +10,6 @@ $square-side: 20px;
 
 #profile-ribbon {
   height: 200px;
-  background: url(../../build/public/images/bannerFlowers.jpg) no-repeat center top;
   background-size: cover;
   position: relative;
   #subribbon {
@@ -29,7 +28,6 @@ $square-side: 20px;
       -moz-border-radius: 50px;
       margin-left: 20px;
       margin-top: 20px;
-      //background: url(../../build/public/images/skjeggemannen.jpg);
       background-size: cover;
       display: block;
     }

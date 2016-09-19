@@ -6,10 +6,7 @@ var $ = require('jquery');
 var LoginView = require('./login/login.view');
 var RegisterView = require('./register/register.view');
 var ProfileView = require('./profile/profile.view');
-var ImageView = require('./photos/photos');
-var TryonsView = require('./tryons/tryons');
 var MenuView = require('./menu/menu.view');
-var ReceiptView = require('./receipt/receipt.view');
 var userModel = require('./user.model');
 var MembershipView = require('./membership/membership.view');
 var LandingView = require('./landing/landing.view');
@@ -22,11 +19,8 @@ var AppRouter = Backbone.Router.extend({
     this.loginView = new LoginView({router: this});
     this.registerView = new RegisterView({router: this});
     this.profileView = new ProfileView({router: this});
-    this.imageView = new ImageView({router: this});
     this.landingView = new LandingView({router: this});
-    this.tryonsView = new TryonsView({router: this});
     this.menuView = new MenuView({});
-    this.receiptView = new ReceiptView({router: this});
     this.voteView = new VoteView({router: this});
     this.membershipView = new MembershipView({router:this});
     this.deniedView = new DeniedView({router: this});
@@ -51,13 +45,10 @@ var AppRouter = Backbone.Router.extend({
     '': 'landing',
     'profile': 'profile',
     'editProfile': 'editProfile',
-    'images': 'images',
     'login': 'login',
     'register': 'register',
     'logout': 'logout',
-    'receipt': 'receipt',
     'landing': 'landing',
-    'tryons': 'tryons',
     'membership': 'membership',
     'denied': 'denied',
     'vote': 'vote'
@@ -77,12 +68,6 @@ var AppRouter = Backbone.Router.extend({
     this.menuView.renderMenuAndProfileImage();
   },
 
-  receipt: function () {
-    this.toggleMenu(true);
-    this.receiptView.fetchAndRender();
-    this.menuView.menuOpen = false;
-    this.menuView.renderMenuAndProfileImage();
-  },
 
   profile: function () {
     this.toggleMenu(true);
@@ -92,12 +77,7 @@ var AppRouter = Backbone.Router.extend({
     this.menuView.renderMenuAndProfileImage();
   },
 
-  images: function () {
-    this.toggleMenu(true);
-    this.imageView.fetchAndRender();
-    this.menuView.menuOpen = false;
-    this.menuView.renderMenuAndProfileImage();
-  },
+
 
   landing: function () {
     $('#login_overlay').css('display','none');
@@ -150,12 +130,7 @@ var AppRouter = Backbone.Router.extend({
     $('#vidplayer').prop('muted', true);
   },
 
-  tryons: function () {
-    this.toggleMenu(true);
-    this.tryonsView.fetchAndRender();
-    this.menuView.menuOpen = false;
-    this.menuView.renderMenuAndProfileImage();
-  },
+
 
   toggleMenu: function (show = true) {
     $('.menuhead').toggle(show);
