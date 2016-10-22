@@ -94,7 +94,7 @@ var ProfileView = Backbone.View.extend({
     },
 
     fetchAndRender: function (options = {}) {
-        this.model.url = "/api/profile/" + this.model.id;
+        this.model.url = "/api/users";
         return this.model.fetch()
           .done(() => {
             this.model.saveState();

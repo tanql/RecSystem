@@ -48,14 +48,6 @@ var MenuView = Backbone.View.extend({
     renderMenuAndProfileImage: function () {
 
         this.render();
-
-        user.url = "/api/profile/" + user.id;
-
-        user.fetch()
-            .done(function () {
-                this.profileImage = user.get('image');
-                this.$('#profile_pic').css('background-image', 'url("' + this.profileImage + '")');
-            }.bind(this));
     },
 
     /*

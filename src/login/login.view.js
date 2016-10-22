@@ -57,7 +57,7 @@ var LoginView = Backbone.View.extend({
     onLogin: function (e) {
         e.preventDefault();
         $.ajax({
-            url: '/api/authenticate',
+            url: '/api/login/',
             type: 'POST',
             data: {
                 'username': this.$('#username').val(),
@@ -67,12 +67,11 @@ var LoginView = Backbone.View.extend({
                 if (response.status === 401 || response.status === 403) {
                     this.router.navigate('denied', true);
                 } else {
-                    console.log(response.status);
+                    console.log(response);
                     this.router.navigate('landing', true);
                 }
             })
             .done((response) => {
-                console.log.
                 this.onLoginSuccess(response);
             });
     },
@@ -82,9 +81,7 @@ var LoginView = Backbone.View.extend({
       $('#landing').css('display','none');
       $('#content').css('display','block');
 
-      localStorage.setItem('x-access-token', response.token);
-      sessionStorage.setItem('moods-userId', response._id);
-      this.model.id = response._id;
+      this.model.id = response.userID;
       this.router.navigate('membership', true);
     }
 });

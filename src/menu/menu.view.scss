@@ -4,7 +4,6 @@
 ---- contains menuhead, hamburger -------- */
 
 .menuhead {
-  background-color: white;
   padding: 0.625em;
   position: fixed;
   width: 100%;
@@ -28,7 +27,7 @@
       height: 1.8em;
       width: 1.8em;
       background-size: cover;
-      border: $moods-gray solid 2px;
+      border: #ffffff solid 2px;
       border-radius: 100%;
     }
   }
@@ -55,8 +54,7 @@
   z-index: 3;
   /* Stripes in Hamburger button */
   div {
-    background-color: $moods-gray;
-    border: 1px solid $moods-gray;
+    border: 1px solid #ffffff;
     border-radius: 0.1em;
     height: 0.125em;
     margin-top: 0.2em;
@@ -78,7 +76,7 @@
     padding: 0.2em 0 0.2em 0;
     height: 2em;
     a {
-      color: $moods-gray;
+      color:#ffffff;
       text-decoration: none;
       font-size: 0.8em;
       text-transform: uppercase;
@@ -139,6 +137,8 @@
 
 @media only screen and (min-width: 53rem) and (max-width: 65rem) {
   .menuhead {
+    background-color: #B9090B;
+
     flex-direction: row;
     height: 3em;
     #large_logo {
@@ -178,6 +178,7 @@
 ------- Larger screen adjustment ----- */
 @media only screen and (min-width: 65rem) {
   .menuhead {
+    background-color: #3498db;
     flex-direction: row;
     height: 3em;
     div {

@@ -37,21 +37,26 @@ var LoginView = Backbone.View.extend({
         $('#landing').css('display','none');
         $('#content').css('display','inherit');
         $.ajax({
-            url: '/api/register',
+            url: '/api/register/',
             type: 'POST',
             data: {
                 'username': this.$('#username').val(),
-                'password': this.$('#password').val()
+                'password1': this.$('#password').val(),
+                'password2': this.$('#password').val(),
+
+
             }})
             .done((response) => {
-                localStorage.setItem('x-access-token', response.token);
-                sessionStorage.setItem('moods-userId', response._id);
+                console.log(response)
                 this.model.id = response._id;
-                this.router.navigate('profile', true);
+                this.router.navigate('landing', true);
             })
             .fail((response) => {
-                
+
             })
+
+
+
     }
 });
 
