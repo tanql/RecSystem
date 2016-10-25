@@ -148,7 +148,7 @@ var AppRouter = Backbone.Router.extend({
         },
 
         logout: function () {
-            userModel.url = "/api/logout/";
+            userModel.url = "api/logout/";
             $.ajax({
                 url: '/api/logout/',
                 type: 'GET'

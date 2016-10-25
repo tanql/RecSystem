@@ -1,6 +1,6 @@
 
 var Backbone = require('backbone');
-
+var user = require('../user.model.js')
 
 var RateModel = Backbone.Model.extend({
 

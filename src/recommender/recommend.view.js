@@ -215,7 +215,6 @@ var RecommendView = Backbone.View.extend({
 
 
         render: function () {
-
             return this.model.fetch()
                     .done(()=>{
 

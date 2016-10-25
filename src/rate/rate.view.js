@@ -6,6 +6,8 @@ require("./rate.scss");
 var Movie =require('./movie.model')
 var movieTemplate = require('./movie.view.hbs')
 var rateMovieTemplate = require('./ratemovie.view.hbs')
+var user = require('../user.model.js')
+
 var MovieView = Backbone.View.extend({
     tagName: 'li',
     initialize: function () {
@@ -52,6 +54,7 @@ var RateMovieView = Backbone.View.extend({
                 data: {
                     'movieId': this.movie,
                     'ratingValue': e.target.value,
+                    'userID': user.id
 
 
                 }}).done((response)=>{
@@ -141,7 +144,6 @@ var RateView = Backbone.View.extend({
 
 
         render: function () {
-
             return this.model.fetch()
                     .done(()=>{
 

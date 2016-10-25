@@ -59,7 +59,7 @@ var devConfig = merge(common, {
   devServer: {
     proxy: {
       '/api/*': {
-        target: 'https://ancient-retreat-74291.herokuapp.com'
+        target: 'http://localhost:3000'
       }
     },
     contentBase: PATHS.build,

@@ -47,7 +47,7 @@ var LoginView = Backbone.View.extend({
         return this;
     },
     fetchAndRender: function () {
-        this.model.url = "/api/profile/" + this.model.id;
+        this.model.url = "/api/users/" + this.model.id;
         return this.model.fetch()
             .done(() => {
                 this.render();
@@ -64,7 +64,7 @@ var LoginView = Backbone.View.extend({
                 'password': this.$('#password').val()
             }})
             .fail((response) => {
-                if (response.status === 401 || response.status === 403) {
+                if (response.status === 400 || response.status === 403) {
                     this.router.navigate('denied', true);
                 } else {
                     console.log(response);
@@ -81,8 +81,9 @@ var LoginView = Backbone.View.extend({
       $('#landing').css('display','none');
       $('#content').css('display','block');
 
-      this.model.id = response.userID;
-      this.router.navigate('membership', true);
+        sessionStorage.setItem('moods-userId', response.userID);
+        this.model.id = response.userID;
+      this.router.navigate('rate', true);
     }
 });
 

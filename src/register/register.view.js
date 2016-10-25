@@ -37,7 +37,7 @@ var LoginView = Backbone.View.extend({
         $('#landing').css('display','none');
         $('#content').css('display','inherit');
         $.ajax({
-            url: '/api/register/',
+            url: 'api/register/',
             type: 'POST',
             data: {
                 'username': this.$('#username').val(),
