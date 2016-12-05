@@ -22,9 +22,11 @@ $moods-gray: #6A6768;
     font-family: $moods-font-family;
 }
 
+
 body {
     margin: 0;
-    background: white;
+    background: #1a1a1a;
+    color: white;
 }
 
 #content {
@@ -57,7 +59,7 @@ body {
     justify-content: center;
     align-self: center;
     border-radius: 1em;
-    background-color: white;
+    background-color: #1a1a1a;
     box-sizing: border-box;
     z-index: 6;
     a {

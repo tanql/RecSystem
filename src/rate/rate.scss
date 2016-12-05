@@ -8,8 +8,13 @@ ul.rate_view{
   list-style: none;
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
-  padding-bottom: 100px;
+  padding-top: 0;
 
+}
+#searcharea{
+  margin-top:60px;
+  margin-left: 20px;
+  height: 35px;
 }
 #content{
   background-color: #1a1a1a;
@@ -17,13 +22,13 @@ ul.rate_view{
 }
 .container{
   background-color: #1a1a1a;
-  padding-bottom: 20px;
 }
 #submitt{
   padding-left: 20px;
 }
 .rate_movie{
-  background-color: grey;
+  size:auto;
+  background-color: #1a1a1a;
   opacity: 1;
   display: -webkit-box;
   display: -moz-box;
@@ -71,45 +76,26 @@ img{
   background:#F90;
 }
 
-#rate_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  align-content: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  z-index: 5;
-}
-#next {
-  background: #3498db;
-  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
-  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
-  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
-  background-image: -o-linear-gradient(top, #3498db, #2980b9);
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+
+.button {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   font-family: Arial;
   color: #ffffff;
   font-size: 20px;
+  background: #575757;
+  padding: 10px 20px 10px 20px;
+  border: solid #000000 1px;
   text-decoration: none;
-  bottom :0;
-  right:0;
-
 }
 
-#next:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+.button:hover {
+  background: #949494;
   text-decoration: none;
 
 }
+
 .nextbutton{
 
   position: absolute;

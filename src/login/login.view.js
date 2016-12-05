@@ -2,7 +2,6 @@ var Backbone = require('backbone');
 var template = require('./login.view.hbs');
 var $ = require('jquery');
 var _ = require('underscore');
-var fbLogin = require('../lib/fb-login');
 
 var LoginView = Backbone.View.extend({
 
@@ -13,8 +12,6 @@ var LoginView = Backbone.View.extend({
 
     events: {
         'submit #login-form': 'onLogin',
-        'click #fb-login-button': 'onFbLogin',
-        'click': 'onClick'
     },
 
     initialize: function (params) {
@@ -22,36 +19,16 @@ var LoginView = Backbone.View.extend({
         this.model = require('../user.model');
     },
 
-    onClick: function(e) {
-        if (e.target.id === 'login_overlay') {
-            this.$el.css('display','none');
-            this.router.navigate('landing',true);
-        }
-    },
 
-    onFbLogin: function (evt) {
-      FB.login(() => {
-        FB.getLoginStatus(response => {
-          fbLogin.verifyFacebookLoginAndGetToken(response, (tokenResponse) => {
-            this.onLoginSuccess(tokenResponse);
-          });
-        });
-      });
-      return false;
-    },
+
 
     render: function (options = {}) {
         const username = options.username || "";
         this.$el.html(this.template({username}));
-        fbLogin.initFacebookLogin('login_view');
         return this;
     },
     fetchAndRender: function () {
-        this.model.url = "/api/users/" + this.model.id;
-        return this.model.fetch()
-            .done(() => {
-                this.render();
-});
+        this.render();
 },
 
     onLogin: function (e) {
@@ -80,9 +57,10 @@ var LoginView = Backbone.View.extend({
       this.$el.css('display','none');
       $('#landing').css('display','none');
       $('#content').css('display','block');
+        this.model=response;
 
-        sessionStorage.setItem('moods-userId', response.userID);
-        this.model.id = response.userID;
+        sessionStorage.setItem('userId', response.userID);
+        console.log(this.model.id)
       this.router.navigate('rate', true);
     }
 });

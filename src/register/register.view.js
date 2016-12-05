@@ -10,8 +10,7 @@ var LoginView = Backbone.View.extend({
     router: '',
 
     events: {
-        'submit #register-form': 'onRegister',
-        'click': 'onClick'
+        'submit #register-form': 'onRegister'
     },
 
     initialize: function (params) {

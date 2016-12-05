@@ -5,7 +5,6 @@
         <input type="button" value="Search" id="searchbutton" class="button" >
     </form>
     <form class="userShow">
-        <a> <button class="edit-profile-link" href="#0"> Edit profile </button></a><br>
 
         <div class="disp" id="displayName">
             <text>Post code: {{postCode}}</text>
@@ -24,20 +23,13 @@
         <div class="disp" id="displayAge">
             <text>Age: {{age}}</text>
         </div>
-        <div class="disp" id="displayAge">
-            <text>My friends:</text>
-            <ul>{{#friends}}
-        <li><a href="#profile/?search="+{{this.userID}}>{{this.userID}}</a></li>
-        {{/friends}}
-        </ul>
-        </div>
         <div class="disp" id="displayMovies">
             <text>Last five rated movies </text>
             <ul>{{#ratedMovies}}
                 <li>{{movie.movieName}}, rating: {{ratingValue}}</li>
             {{/ratedMovies}}
             </ul>
-            <a> <button id="seeAll" class="buttonSmall" > See all </button></a><br>
+            <a> <button id="seeAlls" class="buttonSmall" > See all </button></a><br>
         </div>
 
 
@@ -46,5 +38,9 @@
 
 
     </form>
+    <p><text class="ranktext"> From a rank from -10 to 10 your similarities is ranked as {{similarity}} </text> </p>
+    <p><text class="ranktextsmall"> (Higher number means more similarities. This calculation is based on your previous ratings on common movies) </text> </p>
+
+
 
 </div>

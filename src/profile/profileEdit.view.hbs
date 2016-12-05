@@ -1,71 +1,65 @@
-<div id="profile-ribbon">
-    <div id="subribbon">
-        <div id="circleOnTop" style="background-image: url({{profileImage}})"></div>
-    <span class="nameOnRibbon" id="personName">{{firstName}}
-        <span id="ribbonLastName"> {{lastName}}</span>
-    </span>
-        {{!-- <div id="tractorOnTop" style="background-image: url({{membershipImage}})"></div> --}}
-    </div>
-</div>
+<form class="userEdit" xmlns="http://www.w3.org/1999/html">
 
-
-<form class="userEdit">
 
     <div class="editStuff">
-        <span class="iconClass"><img src="public/icons/Person.svg"></span>
-        <input id="user-name" type="text" value="{{name}}" placeholder="Navn" name="name">
-    </div>
-    <div>
-        <text class="user-name"></text>
-    </div>
-
-    <div class="editStuff">
-        <span class="iconClass"><img src="public/icons/Mobile.svg"></span>
-        <input id="user-username" type="number" value="{{username}}" placeholder="Telefonnummer" name="username">
+        <input id="user-username" type="text" value="{{user.username}}" placeholder="Username" name="username">
     </div>
     <div>
         <text class="user-username"></text>
     </div>
 
     <div class="editStuff">
-    <span class="iconClass"><img src="public/icons/Mail.svg"></span>
-        <input id="user-email" type="text" value="{{email}}" name="email" placeholder="E-post" name="email">
+        <input id="user-email" type="text" value="{{user.email}}" placeholder="E-post" name="email">
     </div>
     <div>
         <text class="user-email"></text>
     </div>
 
     <div class="editStuff">
-        <span class="iconClass"><img src="public/icons/Post.svg"></span>
-        <input id="user-postCode" type="number" value="{{postCode}}" placeholder="Postnummer" label="Postnummer" name="postCode">
-    </div>
-    <div>
-        <text class="user-postCode"></text>
+        <input id="user-age" type="text" value="{{age}}" placeholder="Age" name="age">
     </div>
 
     <div class="editStuff">
-        <span class="iconClass"><img src="public/icons/Birthday.svg"></span>
-        <input class="user-birthday" id="user-birthday-day" type="text" placeholder="DD" value="{{dateOfBirthDay}}" name="dateOfBirthDay" maxlength="2">
-        <input class="user-birthday"  id="user-birthday-month" type="text" value="{{dateOfBirthMonth}}" placeholder="MM" name="dateOfBirthMonth" maxlength="2">
-        <input class="user-birthday"  id="user-birthday-year" type="text" placeholder="YYYY" value="{{dateOfBirthYear}}" name="dateOfBirthYear" maxlength="4">
+        <input id="user-postCode" type="text" value="{{postCode}}" placeholder="Postcode" name="postCode">
     </div>
-
     <div class="editStuff">
-        <text class="user-dateOfBirthDay"></text>
-        <text class="user-dateOfBirthMonth"></text>
-        <text class="user-dateOfBirthYear"></text>
+        <input id="user-interests" type="text" value="{{interests}}" placeholder="Genres I like" name="interests">
+
+    </div>
+    <div class="editGenre">
+        <select name="genre" id ="genre">
+            <option value="IMAX">IMAX</option>
+            <option value="Western">Western</option>
+            <option value="War">War</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Romance">Romance</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Musical">Musical</option>
+            <option value="Horror">Horror</option>
+            <option value="Film-Noir">Film-Noir</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Drama">Drama</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Crime">Crime</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Animation">Animation</option>
+            <option value="Children">Children</option>
+        </select>
+        <input type="button" value="Add genre" id="addGenre" class="buttonSmall" >
+        <input type="button" value="Remove genre" id="removeGenre" class="buttonSmall" >
+
     </div>
 
-    <div class="editStuff" id="intField">
-        <span  class="iconClass" id="intSpan"><img src="public/icons/Int.svg">Interesser:</span>
-        <div class="intDiv" id="int-herre"><img id="img-herre" class="intImage" src="public/images/interestsimages/moods-herre.jpg" {{bind-attr class="interests.herre:: isFalse"}}><span class="imgText">Herre</span></div>
-        <div class="intDiv" id="int-kvinne"><img id="img-kvinne" class="intImage" src="public/images/interestsimages/moods-kvinne.jpg" {{bind-attr class="interests.kvinne:: isFalse"}}><span class="imgText">Kvinne</span></div>
-        <div class="intDiv" id="int-kids"><img id="img-kids" class="intImage" src="public/images/interestsimages/moods-kids.jpg" {{bind-attr class="interests.kids:: isFalse"}}><span class="imgText">Kids</span></div>
-        <div class="intDiv" id="int-sport"><img id="img-sport" class="intImage" src="public/images/interestsimages/moods-sport.jpg" {{bind-attr class="interests.sport:: isFalse"}}><span class="imgText">Sport</span></div>
-    </div>
+
+
+
+
 
     <div id="lastLine">
-        <input type="submit" value="Lagre" href="#profile" id="btnSubmit"> <text class="user-model"></text>
-        <a class="exit-editing-link" href="#profile">Avbryt</a>
+        <a class="exit-editing-link" id="save">Save</a>
+        <a class="exit-editing-link" id="cancel">Cancel</a>
     </div>
 </form>

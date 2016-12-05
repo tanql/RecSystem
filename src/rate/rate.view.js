@@ -28,51 +28,58 @@ var RateMovieView = Backbone.View.extend({
     el: '#login_overlay',
     template: rateMovieTemplate,
     events:{
-        'click': 'onClick'
+        'click': 'onClick',
     },
     initialize: function (option) {
         this.router = option.router;
         this.movie = option.movieId;
+        this.parent =option.parent;
+        this.hasRendered=true;
+        this.model = option.model;
+
+
     },
+
+
     onClick: function(e) {
+        if (this.hasRendered == true) {
 
-        if (e.target.id === 'login_overlay') {
-            this.$el.css('display','none');
+            if (e.target.id === 'login_overlay') {
+                this.$el.css('display', 'none');
+                this.hasRendered=false;
 
-            this.router.navigate('rate',true);
-
-            this.$el.removeData().unbind();
-
-        }
+                this.router.navigate('rate', true);
 
 
-        else if(e.target.id=='str5' ||e.target.id=='str4'||e.target.id=='str3'||e.target.id=='str2'||e.target.id=='str1'){
+            }
+            else if(e.target.id=='str5' ||e.target.id=='str4'||e.target.id=='str3'||e.target.id=='str2'||e.target.id=='str1'){
 
-            $.ajax({
-                url: '/api/rate/',
-                type: 'POST',
-                data: {
-                    'movieId': this.movie,
-                    'ratingValue': e.target.value,
-                    'userID': user.id
+                $.ajax({
+                    url: '/api/rate/',
+                    type: 'POST',
+                    data: {
+                        'movieId': this.model.movieId,
+                        'ratingValue': e.target.value,
 
 
-                }}).done((response)=>{
-                this.$el.css('display','none');
+                    }}).done((response)=>{
+                    this.$el.css('display','none');
+                this.hasRendered=false;
 
                 this.router.navigate('rate',true);
-                this.undelegateEvents();
 
-                this.$el.removeData().unbind();
-        })
+            })
 
         }
+        }
+
+
     },
-    render: function (el) {
+
+    render: function () {
 
         $('#login_overlay').css({'display': 'flex'});
-        console.log(el)
-        this.$el.html(this.template(el))
+        this.$el.html(this.template(this.model))
         return this;
     }
 
@@ -88,37 +95,85 @@ var RateView = Backbone.View.extend({
         events: {
             'submit #register-form': 'onRegister',
             'click #next': 'next',
-            'click img': 'showMovie'
+            'click .individualMovies': 'showMovie',
+            'click #previous': 'previous',
+
+            'click #search': 'search'
+
         },
 
         initialize: function (params) {
             var rateModel = new RateModel();
             this.model = rateModel;
             this.router = params.router;
+
+            this.movie=null;
+        },
+        search: function(){
+            this.router.navigate('rate/?search='+this.$('#searcharea').val(),true);
+            this.$('#searcharea').val('')
+
+
         },
         showMovie: function(e){
 
             var id = $(e.currentTarget).data("id");
             for (var x = 0; x<this.model.get('movies').length; x++){
                 if (this.model.get('movies')[x]['movieName']==id){
-                    var rateMovieView = new RateMovieView({router:this.router, movieId:this.model.get('movies')[x]['movieId']});
-                    rateMovieView.render(this.model.get('movies')[x])
+                    var newModel = this.model.get('movies')[x];
+                    if (newModel.movieName.substring(newModel.movieName.length-10,newModel.movieName.length-7)=='The'){
+                        var moviename= newModel.movieName.substring(0,newModel.movieName.length-11);
+                    }
+                    else{
+                        var moviename = newModel.movieName.substring(0,newModel.movieName.length-6);
+                    }
+                    $.ajax({
+                        url: 'http://www.omdbapi.com/?t='+moviename,
+                        type: 'GET',
+                    })
+                        .done((response) => {
+
+                    newModel['movieUrl']=response.Poster;
+
+                    console.log(newModel)
+                    var rateMovieView = new RateMovieView({router:this.router,parent:this, model:newModel});
+                    this.movie=rateMovieView
+                    rateMovieView.render()
+                })
+
+
+
                 }
             }
 
 
 
         },
+    setFalse:function(){
+        this.hasRendered=false;
+    },
+
         next: function () {
             this.model.url=this.model.get('next')
             this.render()
 
 
         },
+        previous: function () {
+            this.model.url=this.model.get('previous');
+            this.render()
+
+        },
         addModel: function(i){
             var movie=new Movie(this.model.get('movies')[i]);
+            if (movie.get('movieName').substring(movie.get('movieName').length-10,movie.get('movieName').length-7)=='The'){
+                var moviename= movie.get('movieName').substring(0,movie.get('movieName').length-11)
+            }
+            else{
+                var moviename = movie.get('movieName').substring(0,movie.get('movieName').length-6)
+            }
             $.ajax({
-                url: 'http://www.omdbapi.com/?t='+movie.get('movieName').substring(0,movie.get('movieName').length-5),
+                url: 'http://www.omdbapi.com/?t='+moviename,
                 type: 'GET',
             })
                 .done((response) => {
@@ -143,11 +198,19 @@ var RateView = Backbone.View.extend({
 
 
 
-        render: function () {
+        render: function (url) {
+
+            if(typeof url !== 'undefined'){
+                this.model.url = '/api/rate/?search='+this.$('#searcharea').val()
+
+            }
+
+            console.log(this.model.url)
             return this.model.fetch()
                     .done(()=>{
+            this.model.url= 'api/rate/?page=1';
 
-            this.$el.html(this.template(this.model.toJSON()));
+                this.$el.html(this.template(this.model.toJSON()));
 
                     for ( var i = 0; i <this.model.get('movies').length; i++) {
                         this.addModel(i)

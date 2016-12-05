@@ -12,7 +12,8 @@ var LandingView = require('./landing/landing.view');
 var DeniedView = require('./denied/denied.view');
 var RateView = require('./rate/rate.view');
 var RecommendView = require('./recommender/recommend.view.js');
-
+var MyMoviesView = require('./profile/mymovies.view.js');
+var SearchUserView = require('./profile/searchUser.view.js');
 var AppRouter = Backbone.Router.extend({
 
         initialize: function () {
@@ -20,10 +21,12 @@ var AppRouter = Backbone.Router.extend({
             this.registerView = new RegisterView({router: this});
             this.profileView = new ProfileView({router: this});
             this.landingView = new LandingView({router: this});
-            this.menuView = new MenuView({});
+            this.menuView = new MenuView({router:this});
             this.deniedView = new DeniedView({router: this});
             this.rateView = new RateView({router: this});
             this.recommendView = new RecommendView({router: this});
+            this.myMoviesView = new MyMoviesView({router: this});
+            this.searchUserView = new SearchUserView({router: this});
 
             this.on('route', this.resetHeader);
 
@@ -46,42 +49,80 @@ var AppRouter = Backbone.Router.extend({
             '': 'landing',
             'recommend':'recommend',
             'profile': 'profile',
+            'profile/?search=:id': 'searchProfile',
             'editProfile': 'editProfile',
             'login': 'login',
             'register': 'register',
             'logout': 'logout',
             'landing': 'landing',
             'denied': 'denied',
+            'ratedMovies/?id=:id': 'ratedMovies',
             'rate': 'rate',
+            'rate/?search=:id': 'searchRate'
+        },
+    searchProfile:function(id){
+        this.searchUserView.render(id);
+        this.toggleMenu(true);
+        this.menuView.menuOpen = false;
+        this.menuView.renderMenuAndProfileImage();
+    },
+    searchRate: function (id) {
+        $('#login_overlay').css('display','none');
+        $('#content').css('display','flex');
+        $('#lading').css('display','none');
+        this.rateView.render(id);
+        this.toggleMenu(true);
+        this.menuView.menuOpen = false;
+        this.menuView.renderMenuAndProfileImage();
+    },
+        ratedMovies: function(id){
+            $('#login_overlay').css('display','none');
+            $('#content').css('display','flex');
+            $('#lading').css('display','none');
+            this.myMoviesView.render(id)
+            this.toggleMenu(true);
+            this.menuView.menuOpen = false;
+            this.menuView.renderMenuAndProfileImage();
+
+
+
         },
         rate: function(){
             $('#login_overlay').css('display','none');
             $('#content').css('display','flex');
             $('#lading').css('display','none');
+            this.recommendView.setFalse();
             this.rateView.render();
             this.toggleMenu(true);
             this.menuView.menuOpen = false;
             this.menuView.renderMenuAndProfileImage();
+
         },
 
         recommend: function(){
             $('#login_overlay').css('display','none');
             $('#content').css('display','flex');
             $('#lading').css('display','none');
+            this.recommendView.model.url='api/recommend/?page=1';
             this.recommendView.render();
             this.toggleMenu(true);
             this.menuView.menuOpen = false;
             this.menuView.renderMenuAndProfileImage();
+
+
         },
 
 
 
         profile: function () {
+
             this.toggleMenu(true);
             this.profileView.isEditing = false;
             this.profileView.fetchAndRender();
             this.menuView.menuOpen = false;
             this.menuView.renderMenuAndProfileImage();
+
+
         },
 
 
@@ -93,10 +134,10 @@ var AppRouter = Backbone.Router.extend({
             $('#landing .background, #item_container').css('opacity','1');
             this.landingView.render();
             this.toggleMenu(false);
+
         },
 
         login: function (username) {
-            this.landing();
             $('#login_overlay').css({'display': 'flex', 'opacity': '0'});
             // Animates if screen is large aka on desktop.
             if (this.mq.matches) {
@@ -108,11 +149,11 @@ var AppRouter = Backbone.Router.extend({
             }
             this.loginView.render({username});
             this.toggleMenu(false);
-            $('#vidplayer').prop('muted', true);
+
+
         },
 
         register: function () {
-            this.landing();
             $('#login_overlay').css({'display': 'flex', 'opacity': '0'});
             // Animates if screen is large aka on desktop.
             if (this.mq.matches) {
@@ -124,7 +165,8 @@ var AppRouter = Backbone.Router.extend({
             }
             this.registerView.render();
             this.toggleMenu(false);
-            $('#vidplayer').prop('muted', true);
+
+
         },
 
         denied: function () {
@@ -134,7 +176,6 @@ var AppRouter = Backbone.Router.extend({
             $('#landing div, img').css({opacity: 0.1});
             this.deniedView.render(errorMessage);
             this.toggleMenu(false);
-            $('#vidplayer').prop('muted', true);
         },
 
 
@@ -154,7 +195,9 @@ var AppRouter = Backbone.Router.extend({
                 type: 'GET'
             })
                 .done((response) => {
-                this.navigate('landing', true);
+                sessionStorage.clear();
+
+            this.navigate('landing', true);
         }).fail((response) => {
 
     })
@@ -162,11 +205,17 @@ var AppRouter = Backbone.Router.extend({
 },
 
 editProfile: function() {
+    $('#login_overlay').css('display','none');
+    $('#content').css('display','flex');
+    $('#lading').css('display','none');
     this.toggleMenu(true);
     this.profileView.isEditing = true;
-    this.profileView.fetchAndRender(); //test
-    this.menuView.menuOpen = false; //test
+    this.profileView.fetchAndRender();
+    this.menuView.menuOpen = false;
+    this.menuView.renderMenuAndProfileImage();
+
     this.profileView.render();
+
 },
 
 resetHeader: function () {

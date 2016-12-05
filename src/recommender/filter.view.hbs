@@ -5,12 +5,15 @@
     <div>
         <form action="submit" id="filterform">
             <input type="text" id="year" placeholder="Year">
-            <select name="period" id ="period">
-                <option value="before">Before</option>
-                <option value="after">After</option>
-                <option value="in">In</option>
-            </select>
-            <input type="button" value="Filter" id="filtersubmitt" >
+            <div id="periodcontent">
+                <select name="period" id ="period">
+                    <option value="before">Before</option>
+                    <option value="after">After</option>
+                    <option value="in">In</option>
+                </select>
+            </div>
+
+            <input type="button" value="Filter" id="filtersubmittyear" >
         </form>
     </div>
 

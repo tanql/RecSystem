@@ -4,8 +4,10 @@ var template = require('./recommend.view.hbs');
 var $ = require('jquery');
 require("./rate.scss");
 var Movie =require('../rate/movie.model');
-var movieTemplate = require('../rate/movie.view.hbs');
+var movieTemplate = require('./detail.view.hbs');
+var detailMovie = require('./ratemovie.view.hbs')
 var filterByYear = require('./filter.view.hbs');
+var filterByTime = require('./filtertime.view.hbs');
 var filterByGender = require('./filtergender.view.hbs');
 var MovieView = Backbone.View.extend({
     tagName: 'li',
@@ -28,48 +30,92 @@ var FilterGenderView = Backbone.View.extend({
     template: filterByGender,
     events:{
         'click': 'onClick',
-        'click #filtersubmitt': 'filterSubmitt'
+        'click #filtersubmittgender': 'filterSubmitt'
 
     },
     initialize: function (option) {
         this.router = option.router;
         this.parent = option.parent
+
     },
     onClick: function(e) {
+        if (this.parent.hasRendered == true) {
 
-        if (e.target.id === 'login_overlay') {
-            this.$el.css('display','none');
+            if (e.target.id === 'login_overlay') {
+                $('#login_overlay').css('display', 'none');
+                $('#content').css('display', 'flex');
+                $('#lading').css('display', 'none');
 
-            this.router.navigate('recommend',true);
-            this.undelegateEvents();
 
-            this.$el.removeData().unbind();
-
+            }
         }
-
 
     },
 
         filterSubmitt: function (e) {
-            e.preventDefault();
 
-            this.$el.css('display','none');
+            $('#login_overlay').css('display','none');
+            $('#content').css('display','flex');
+            $('#lading').css('display','none');
 
-            $('#landing').css('display','none');
-            $('#content').css('display','inherit');
-            this.parent.destroy()
-            var recommendView = new RecommendView({router:this.router})
-            recommendView.nextfilter('/api/recommend/?filter='+this.$('#gender').val())
-            this.undelegateEvents();
+            this.parent.nextfilter('/api/recommend/?filter='+this.$('#gender').val())
 
-            this.$el.removeData().unbind();
 
 
 
 
         },
     render: function () {
+        $('#login_overlay').css({'display': 'flex'});
+        this.$el.html(this.template())
+        return this;
+    }
 
+
+});
+
+var FilterTimeView = Backbone.View.extend({
+    el: '#login_overlay',
+    template: filterByTime,
+    events:{
+        'click': 'onClick',
+        'click #filtersubmitttime': 'filterSubmitt'
+
+    },
+    initialize: function (option) {
+        this.router = option.router;
+        this.parent = option.parent
+
+    },
+    onClick: function(e) {
+        if (this.parent.hasRendered == true) {
+
+            if (e.target.id === 'login_overlay') {
+                $('#login_overlay').css('display', 'none');
+                $('#content').css('display', 'flex');
+                $('#lading').css('display', 'none');
+
+                this.router.navigate('recommend', true);
+
+            }
+        }
+
+    },
+
+    filterSubmitt: function (e) {
+
+        $('#login_overlay').css('display','none');
+        $('#content').css('display','flex');
+        $('#lading').css('display','none');
+        this.parent.model.url="/api/recommend/?time="+this.$('#time').val(),
+        this.parent.render(this.$('#time').val())
+
+
+
+
+
+    },
+    render: function () {
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template())
         return this;
@@ -80,56 +126,114 @@ var FilterGenderView = Backbone.View.extend({
 
 var FilterView = Backbone.View.extend({
     el: '#login_overlay',
-    template: filterByGender,
+    template: filterByYear,
     events:{
         'click': 'onClick',
-        'click #filtersubmitt': 'filterSubmitt'
+        'click #filtersubmittyear': 'filterSubmitt'
 
     },
     initialize: function (option) {
         this.router = option.router;
-        this.parent = option.parent
+        this.parent = option.parent;
+
     },
+
     onClick: function(e) {
+        if (this.parent.hasRendered == true) {
 
-        if (e.target.id === 'login_overlay') {
-            this.$el.css('display','none');
+            if (e.target.id === 'login_overlay') {
+                $('#login_overlay').css('display','none');
+                $('#content').css('display','flex');
+                $('#lading').css('display','none');
 
-            this.router.navigate('recommend',true);
-            this.undelegateEvents();
+                this.router.navigate('recommend',true);
 
-            this.$el.removeData().unbind();
-
+            }
         }
+
+
 
 
     },
 
     filterSubmitt: function (e) {
-        e.preventDefault();
 
-        this.$el.css('display','none');
+        $('#login_overlay').css('display','none');
+        $('#content').css('display','flex');
+        $('#lading').css('display','none');
+        this.parent.nextfilter('/api/recommend/?'+this.$('#period').val()+'='+this.$('#year').val())
 
-        $('#landing').css('display','none');
-        $('#content').css('display','inherit');
-        this.parent.destroy()
-        console.log(this.$('#period').val())
-        var recommendView = new RecommendView({router:this.router})
-        recommendView.nextfilter('/api/recommend/?'+this.$('#period').val()+'='+this.$('#year').val())
-        this.undelegateEvents();
-
-        this.$el.removeData().unbind();
 
 
 
 
     },
     render: function () {
-
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template())
         return this;
     }
+
+
+});
+var RateMovieView = Backbone.View.extend({
+        el: '#login_overlay',
+        template: detailMovie,
+        events:{
+            'click': 'onClick',
+        },
+        initialize: function (option) {
+            this.router = option.router;
+            this.movie = option.movieId;
+            this.parent =option.parent;
+            this.hasRendered=true;
+            this.model = option.model;
+
+
+        },
+
+
+        onClick: function(e) {
+            if (this.hasRendered == true) {
+
+                if (e.target.id === 'login_overlay') {
+                    this.$el.css('display', 'none');
+                    this.hasRendered=false;
+
+                    this.router.navigate('recommend', true);
+
+
+                }
+                else if(e.target.id=='str5' ||e.target.id=='str4'||e.target.id=='str3'||e.target.id=='str2'||e.target.id=='str1'){
+
+                    $.ajax({
+                        url: '/api/rate/',
+                        type: 'POST',
+                        data: {
+                            'movieId': this.model.movieId,
+                            'ratingValue': e.target.value,
+
+
+                        }}).done((response)=>{
+                        this.$el.css('display','none');
+                    this.hasRendered=false;
+
+                    this.router.navigate('rate',true);
+
+                })
+
+            }
+        }
+
+
+    },
+
+    render: function () {
+
+    $('#login_overlay').css({'display': 'flex'});
+    this.$el.html(this.template(this.model))
+    return this;
+}
 
 
 });
@@ -143,8 +247,12 @@ var RecommendView = Backbone.View.extend({
         events: {
             'submit #register-form': 'onRegister',
             'click #nextrec': 'nextrec',
-            'click img': 'showMovie',
+            'click #previousrec': 'previousrec',
+
+            'click .detailMovie': 'showMovie',
             'click #filter': 'filterByYear',
+            'click #filterTime': 'filterByTime',
+
             'click #filterGender': 'filterByGender'
 
         },
@@ -153,48 +261,82 @@ var RecommendView = Backbone.View.extend({
             var rateModel = new RateModel();
             this.model = rateModel;
             this.router = params.router;
+            this.filterVew = new FilterView({router:this.router, parent:this});
+            this.filterGenderView = new FilterGenderView({router:this.router, parent:this});
+            this.filterTimeView = new FilterTimeView({router:this.router, parent:this});
+
+            this.hasRendered=false;
+
 
         },
-        destroy: function() {
-
-        // COMPLETELY UNBIND THE VIEW
-        this.undelegateEvents();
-
-        this.$el.removeData().unbind();
-
-        // Remove view from DOM
-
+    setFalse:function(){
+        this.hasRendered=false;
     },
+
+    filterByTime: function(){
+        this.filterTimeView.render()
+    },
+
     filterByGender: function(){
-        var filterVew = new FilterGenderView({router:this.router, parent:this});
-        filterVew.render()
+        this.filterGenderView.render()
     },
 
         filterByYear: function(){
-            var filterVew = new FilterView({router:this.router, parent:this});
-            filterVew.render()
+            this.filterVew.render()
+
         },
         nextfilter: function (url) {
             this.model.url=url;
-            console.log(this.model)
             this.render()
 
         },
         nextrec: function () {
             this.model.url=this.model.get('next')
-            console.log(this.model.url)
-            this.render()
+            if(this.model.get('next').indexOf('time=') >= 0) {
+                this.render(this.model.get('next').slice(this.model.get('next').indexOf('time=')+5));
+            }
+            else{
+                this.render()
+            }
 
         },
-        addModel: function(i){
+    previousrec: function () {
+        this.model.url=this.model.get('previous')
+        if(this.model.get('previous').indexOf('time=') >= 0) {
+            this.render(this.model.get('previous').slice(this.model.get('previous').indexOf('time=')+5));
+        }
+        else{
+            this.render()
+        }
+
+    },
+        addModel: function(i,time){
             var movie=new Movie(this.model.get('movies')[i]);
+            if (movie.get('movieName').substring(movie.get('movieName').length-10,movie.get('movieName').length-7)=='The'){
+                var moviename= movie.get('movieName').substring(0,movie.get('movieName').length-11)
+            }
+            else{
+                var moviename = movie.get('movieName').substring(0,movie.get('movieName').length-6)
+            }
             $.ajax({
-                url: 'http://www.omdbapi.com/?t='+movie.get('movieName').substring(0,movie.get('movieName').length-5),
+                url: 'http://www.omdbapi.com/?t='+moviename,
                 type: 'GET',
             })
                 .done((response) => {
 
-                movie.set('movieUrl',response.Poster)
+                movie.set('movieUrl',response.Poster);
+                if (response.hasOwnProperty('Runtime')) {
+                    if (response.Runtime=='N/A'){
+                        var numb=999999999999999;
+                    }
+                    else{
+                        var numb = response.Runtime.match(/\d/g);
+                        numb = numb.join("");
+                    }
+
+
+                    movie.set('runtime', parseInt(numb));
+                };
             var movieName=movie.get('movieName').replace('+',' ');
 
             for (var x = 0, len = movieName.length; x < len; x++) {
@@ -202,8 +344,20 @@ var RecommendView = Backbone.View.extend({
 
             }
             movie.set('movieName', movieName);
-            var movieView = new MovieView({model: movie});
-            this.$('.rate_view').append(movieView.render().el);
+            if (typeof time == 'string'){
+                if (parseInt(numb)<parseInt(time)){
+                    var movieView = new MovieView({model: movie});
+                    this.$('.recommend_view').append(movieView.render().el);
+
+
+                }
+            }
+            else{
+                var movieView = new MovieView({model: movie});
+                this.$('.recommend_view').append(movieView.render().el);
+
+
+            }
 
 
 
@@ -211,17 +365,59 @@ var RecommendView = Backbone.View.extend({
 
             });
         },
+        showMovie: function(e){
+
+            var id = $(e.currentTarget).data("id");
+            for (var x = 0; x<this.model.get('movies').length; x++){
+                if (this.model.get('movies')[x]['movieName']==id){
+                    var newModel = this.model.get('movies')[x];
+                    if (newModel.movieName.substring(newModel.movieName.length-10,newModel.movieName.length-7)=='The'){
+                        var moviename= newModel.movieName.substring(0,newModel.movieName.length-11);
+                    }
+                    else{
+                        var moviename = newModel.movieName.substring(0,newModel.movieName.length-6);
+                    }
+                    $.ajax({
+                        url: 'http://www.omdbapi.com/?t='+moviename,
+                        type: 'GET',
+                    })
+                        .done((response) => {
+
+                        newModel['movieUrl']=response.Poster;
+                        newModel['actors']=response.Actors;
+                        newModel['plot']=response.Plot;
+                        newModel['imdbRating']=response.imdbRating;
+
+
+                    console.log(newModel)
+                    var rateMovieView = new RateMovieView({router:this.router,parent:this, model:newModel});
+                    this.movie=rateMovieView
+                    rateMovieView.render()
+                })
 
 
 
-        render: function () {
+            }
+        }
+
+
+
+        },
+
+
+
+        render: function (time) {
+            this.hasRendered=true;
+            console.log(this.model.url)
             return this.model.fetch()
                     .done(()=>{
 
-            this.$el.html(this.template(this.model.toJSON()));
+
+                    this.$el.html(this.template(this.model.toJSON()));
 
                     for ( var i = 0; i <this.model.get('movies').length; i++) {
-                        this.addModel(i)
+
+                        this.addModel(i,time)
                     }
 
 

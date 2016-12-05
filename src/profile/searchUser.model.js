@@ -1,6 +1,7 @@
 /**
- * Created by ltanquac on 04.07.2016.
+ * Created by tanle on 14.11.2016.
  */
+
 var Backbone = require('backbone');
 var moment = require('moment');
 var _ = require('underscore');
@@ -8,35 +9,26 @@ var _ = require('underscore');
 
 var UserModel = Backbone.Model.extend({
 
-    idAttribute: "_id",
-
-    initialize: function () {
-        var userId = sessionStorage.getItem('userId');
-        if (userId) {
-            this.id = userId;
-        }
-        this.listenTo(this, 'change', this.onChange);
-    },
-
-    isNew: function () {
-        return !this.id;
-    },
 
 
 
     defaults: {
+        userID:'',
         user: '',
         postCode: '',
         interests:[],
         ratedMovies: '',
+        similarity:'',
         age:''
     },
 
     stateAttributes: [
-        '_id',
+
+        'userid',
         'user',
         'interests',
         'ratedMovies',
+        'similarity',
         'age',
         'postCode'
     ],
@@ -49,31 +41,33 @@ var UserModel = Backbone.Model.extend({
         this.clear();
         this.stateAttributes.forEach((key) => {
             this.set(key, this.savedState[key]);
-        });
-    },
+    });
+},
 
-    validation: {
+validation: {
 
-        postCode: {
-            required: false,
+    postCode: {
+        required: false,
             pattern: /^\d{4}$/,
             msg: 'Postnummeret må inneholde fire siffer.'
-        }
-    },
-
-    //Only store stateAttributes on save
-    toJSON: function () {
-
-        return _.extend(this.pick(
-            'user',
-            'postCode',
-            'ratedMovies',
-            'age',
-            'interests'
-
-        ))
     }
+},
+
+//Only store stateAttributes on save
+toJSON: function () {
+
+    return _.extend(this.pick(
+        'userID',
+        'user',
+        'postCode',
+        'ratedMovies',
+        'age',
+        'similarity',
+        'interests'
+
+    ))
+}
 
 });
 
-module.exports = new UserModel();
+module.exports = UserModel;

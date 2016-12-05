@@ -1,4 +1,4 @@
-.rate_view{
+.recommend_view{
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -11,23 +11,19 @@
   color: white;
 
 }
-#submitt{
-  padding-left: 20px;
-}
-.rate_movie{
-  background-color: grey;
+.singleMovie{
+  size:auto;
+  max-width: 40%;
+  background-color: #1a1a1a;
   opacity: 1;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
   list-style: none;
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
+  font-size: 18px;
 
 }
+
+
 img{
   height: 400px;
   width: 300px;
@@ -35,44 +31,8 @@ img{
 .child{
   padding-right: 5%;
 }
-.rating {
-  float:left;
-  width:180px;
-}
-.rating span { float:right; position:relative; }
-.rating span input {
-  position:absolute;
-  top:0px;
-  opacity:0;
-}
-.rating span label {
-  display:inline-block;
-  width:30px;
-  height:30px;
-  background:#ccc;
-  font-size:30px;
-  margin-right:2px;
-  line-height:30px;
-  border-radius:50%;
-  -webkit-border-radius:50%;
-}
-.rating span:hover ~ span label,
-.rating span:hover label,
-.rating span.checked label,
-.rating span.checked ~ span label {
-  background:#F90;
-}
 
-#rate_overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  align-content: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  z-index: 5;
-}
+
 .button {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -97,6 +57,9 @@ img{
   left: 20px;
 
 
+}
+#periodcontent{
+  padding-bottom: 10px;
 }
 #buttongroup{
   display: -webkit-box;
