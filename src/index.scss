@@ -5,21 +5,21 @@ $overlay-opaque-white: rgba(255, 255, 255, 0.7);
 $overlay-opaque-black: rgba(0, 0, 0, 0.5);
 
 /*------- COLOURS! -------
-- source: Moods digital directions - */
-$moods-pink1: #EE2A7B;
-$moods-pink2: #FF8FCC;
-$moods-pink3: #FFDDF0;
-$moods-blue:  #54D1FF;
-$moods-grey1: #454142;
-$moods-grey2: #6A6768;
-$moods-grey3: #CFDCE4;
-$moods-grey4: #EBEEF2;
+- */
+$my-pink1: #EE2A7B;
+$my-pink2: #FF8FCC;
+$my-pink3: #FFDDF0;
+$my-blue:  #54D1FF;
+$my-grey1: #454142;
+$my-grey2: #6A6768;
+$my-grey3: #CFDCE4;
+$my-grey4: #EBEEF2;
 
-$moods-font-family: 'Century Gothic', CenturyGothic, sans-serif;
-$moods-gray: #6A6768;
+$my-font-family: 'Century Gothic', CenturyGothic, sans-serif;
+$my-gray: #6A6768;
 
 * {
-    font-family: $moods-font-family;
+    font-family: $my-font-family;
 }
 
 
@@ -89,7 +89,7 @@ body {
             border: 0 none;
             border-radius: 1.5em;
             padding: 0.6125em;
-            background-color: $moods-grey4;
+            background-color: $my-grey4;
             font-size: 1em;
         }
         input[type="submit"] {
@@ -98,7 +98,7 @@ body {
             font-weight: bold;
         }
         input:last-child:hover {
-            background-color: $moods-pink3;
+            background-color: $my-pink3;
         }
         a img {
             width: 70%;

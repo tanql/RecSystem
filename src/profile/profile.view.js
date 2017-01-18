@@ -28,15 +28,11 @@ var ProfileView = Backbone.View.extend({
         'click #seeAll': 'seeAll',
         'click #addGenre': 'addGenre',
         'click #removeGenre': 'removeGenre'
-
-
-
     },
 
     initialize: function(params){
         this.model = require('../user.model');
         this.router = params.router;
-
     },
     search: function(){
         this.model.url = "/api/users/?user="+this.$('#searchuser').val();
@@ -45,47 +41,31 @@ var ProfileView = Backbone.View.extend({
             type: 'GET'
             })
         .done((response) => {
-
         this.router.navigate('profile/?search='+response.userID)
 });
     },
     addGenre: function(){
         this.model.get('interests').push(this.$('#genre').val())
         this.$('#user-interests').val(this.$('#user-interests').val()+','+this.$('#genre').val())
-
-
     },
     removeGenre: function(){
-
-
         var index = this.model.get('interests').indexOf(this.$('#genre').val());
         if (index > -1) {
             this.model.get('interests').splice(index, 1);
         }
         this.$('#user-interests').val(this.$('#user-interests').val().replace(','+this.$('#genre').val(),""));
-
-
-
     },
     seeAll: function(){
-        console.log(this.model.id)
         this.router.navigate('ratedMovies/?id='+this.model.id,true)
     },
 
     render: function (options = {}) {
-        console.log(this.model.id)
         this.template = (this.isEditing) ? editTemplate : template;
         this.$el.html(this.template(this.getTemplateData(options)));
-
-
-
-
-
     },
 
     getTemplateData: function (options = {}) {
         return this.model.attributes
-
     },
 
     fetchAndRender: function (options = {}) {
@@ -95,7 +75,6 @@ var ProfileView = Backbone.View.extend({
             this.model.saveState();
 
         this.render(options);
-
           });
     },
 
@@ -121,7 +100,6 @@ var ProfileView = Backbone.View.extend({
     onAbort: function (e) {
         e.preventDefault();
         var image=this.model.get('image');
-
         this.model.restoreState();
         this.model.set('image', image);
         this.model.set('_id', sessionStorage.getItem('userId'))
@@ -130,25 +108,19 @@ var ProfileView = Backbone.View.extend({
 
     saveChanges: function () {
         this.model.url = '/api/users/' + this.model.id;
-
         this.model.save()
             .done((response) => {
-            console.log(response.toJSON)
             this.router.navigate('profile', true);
-
-
     });
     },
 
     changeAge: function(e){
         e.preventDefault();
         this.model.set('age', this.$('#user-age').val());
-
     },
     changeInterests: function(e){
         e.preventDefault();
         this.model.set('interests', this.$('#user-interests').val());
-
     },
 
 

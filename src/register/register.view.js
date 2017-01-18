@@ -46,16 +46,12 @@ var LoginView = Backbone.View.extend({
 
             }})
             .done((response) => {
-                console.log(response)
                 this.model.id = response._id;
                 this.router.navigate('landing', true);
             })
             .fail((response) => {
 
             })
-
-
-
     }
 });
 

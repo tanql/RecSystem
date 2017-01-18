@@ -8,10 +8,6 @@ var _ = require('underscore');
 
 
 var UserModel = Backbone.Model.extend({
-
-
-
-
     defaults: {
         userID:'',
         user: '',

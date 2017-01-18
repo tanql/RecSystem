@@ -7,8 +7,6 @@ var Backbone = require('backbone');
 
 var MovieModel = Backbone.Model.extend({
 
-
-
 });
 
 module.exports = MovieModel;

@@ -1,6 +1,5 @@
 /*-------------- LANDING PAGE -----------
  -----------------------------------------*/
-
 @import "../index.scss";
 
 #landing {
@@ -82,7 +81,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: $moods-pink3;
+        background: $my-pink3;
         border-radius: 3em;
         height: 2em;
         margin: 2em;
@@ -120,7 +119,7 @@
         left: 50%;
         transform: scale(8, 2);
         opacity: 0.7;
-        color: $moods-grey2;
+        color: $my-grey2;
         cursor: pointer;
         &:hover {
           opacity: 1;
@@ -145,7 +144,6 @@
         }
       }
     }
-
 
     #logo_container {
       display: flex;
@@ -192,8 +190,8 @@
         border-radius: 2.2em;
         &:hover {
           color: black;
-          background-color: $moods-pink3;
-          border: $moods-pink3 solid;
+          background-color: $my-pink3;
+          border: $my-pink3 solid;
         }
         &:first-child {
           margin-right: 0.5em;

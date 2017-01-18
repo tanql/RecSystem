@@ -9,6 +9,7 @@ var detailMovie = require('./ratemovie.view.hbs')
 var filterByYear = require('./filter.view.hbs');
 var filterByTime = require('./filtertime.view.hbs');
 var filterByGender = require('./filtergender.view.hbs');
+
 var MovieView = Backbone.View.extend({
     tagName: 'li',
     initialize: function () {
@@ -16,71 +17,48 @@ var MovieView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-
-
         this.$el.html(this.template(this.model.toJSON()))
         return this;
     }
-
-
 });
-
 var FilterGenderView = Backbone.View.extend({
     el: '#login_overlay',
     template: filterByGender,
     events:{
         'click': 'onClick',
         'click #filtersubmittgender': 'filterSubmitt'
-
     },
     initialize: function (option) {
         this.router = option.router;
         this.parent = option.parent
-
     },
     onClick: function(e) {
         if (this.parent.hasRendered == true) {
-
             if (e.target.id === 'login_overlay') {
                 $('#login_overlay').css('display', 'none');
                 $('#content').css('display', 'flex');
                 $('#lading').css('display', 'none');
-
-
             }
         }
-
     },
-
         filterSubmitt: function (e) {
-
             $('#login_overlay').css('display','none');
             $('#content').css('display','flex');
             $('#lading').css('display','none');
-
             this.parent.nextfilter('/api/recommend/?filter='+this.$('#gender').val())
-
-
-
-
-
         },
     render: function () {
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template())
         return this;
     }
-
-
 });
-
 var FilterTimeView = Backbone.View.extend({
     el: '#login_overlay',
     template: filterByTime,
     events:{
         'click': 'onClick',
         'click #filtersubmitttime': 'filterSubmitt'
-
     },
     initialize: function (option) {
         this.router = option.router;
@@ -89,92 +67,60 @@ var FilterTimeView = Backbone.View.extend({
     },
     onClick: function(e) {
         if (this.parent.hasRendered == true) {
-
             if (e.target.id === 'login_overlay') {
                 $('#login_overlay').css('display', 'none');
                 $('#content').css('display', 'flex');
                 $('#lading').css('display', 'none');
 
                 this.router.navigate('recommend', true);
-
             }
         }
-
     },
-
     filterSubmitt: function (e) {
-
         $('#login_overlay').css('display','none');
         $('#content').css('display','flex');
         $('#lading').css('display','none');
         this.parent.model.url="/api/recommend/?time="+this.$('#time').val(),
         this.parent.render(this.$('#time').val())
-
-
-
-
-
     },
     render: function () {
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template())
         return this;
     }
-
-
 });
-
 var FilterView = Backbone.View.extend({
     el: '#login_overlay',
     template: filterByYear,
     events:{
         'click': 'onClick',
         'click #filtersubmittyear': 'filterSubmitt'
-
     },
     initialize: function (option) {
         this.router = option.router;
         this.parent = option.parent;
-
     },
-
     onClick: function(e) {
         if (this.parent.hasRendered == true) {
-
             if (e.target.id === 'login_overlay') {
                 $('#login_overlay').css('display','none');
                 $('#content').css('display','flex');
                 $('#lading').css('display','none');
-
                 this.router.navigate('recommend',true);
-
             }
         }
-
-
-
-
     },
-
     filterSubmitt: function (e) {
-
         $('#login_overlay').css('display','none');
         $('#content').css('display','flex');
         $('#lading').css('display','none');
         this.parent.nextfilter('/api/recommend/?'+this.$('#period').val()+'='+this.$('#year').val())
-
-
-
-
-
     },
     render: function () {
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template())
         return this;
     }
-
-
 });
 var RateMovieView = Backbone.View.extend({
         el: '#login_overlay',
@@ -188,75 +134,49 @@ var RateMovieView = Backbone.View.extend({
             this.parent =option.parent;
             this.hasRendered=true;
             this.model = option.model;
-
-
         },
-
-
         onClick: function(e) {
             if (this.hasRendered == true) {
-
                 if (e.target.id === 'login_overlay') {
                     this.$el.css('display', 'none');
                     this.hasRendered=false;
-
                     this.router.navigate('recommend', true);
-
-
                 }
                 else if(e.target.id=='str5' ||e.target.id=='str4'||e.target.id=='str3'||e.target.id=='str2'||e.target.id=='str1'){
-
                     $.ajax({
                         url: '/api/rate/',
                         type: 'POST',
                         data: {
                             'movieId': this.model.movieId,
                             'ratingValue': e.target.value,
-
-
                         }}).done((response)=>{
                         this.$el.css('display','none');
                     this.hasRendered=false;
-
                     this.router.navigate('rate',true);
-
                 })
-
             }
         }
-
-
     },
-
     render: function () {
-
     $('#login_overlay').css({'display': 'flex'});
     this.$el.html(this.template(this.model))
     return this;
 }
-
-
 });
 var RecommendView = Backbone.View.extend({
         tagName: 'ul',
         el: '#content',
-
         template:template,
         router: '',
-
         events: {
             'submit #register-form': 'onRegister',
             'click #nextrec': 'nextrec',
             'click #previousrec': 'previousrec',
-
             'click .detailMovie': 'showMovie',
             'click #filter': 'filterByYear',
             'click #filterTime': 'filterByTime',
-
             'click #filterGender': 'filterByGender'
-
         },
-
         initialize: function (params) {
             var rateModel = new RateModel();
             this.model = rateModel;
@@ -264,26 +184,20 @@ var RecommendView = Backbone.View.extend({
             this.filterVew = new FilterView({router:this.router, parent:this});
             this.filterGenderView = new FilterGenderView({router:this.router, parent:this});
             this.filterTimeView = new FilterTimeView({router:this.router, parent:this});
-
             this.hasRendered=false;
-
-
         },
     setFalse:function(){
         this.hasRendered=false;
     },
-
     filterByTime: function(){
         this.filterTimeView.render()
     },
-
     filterByGender: function(){
         this.filterGenderView.render()
     },
 
         filterByYear: function(){
             this.filterVew.render()
-
         },
         nextfilter: function (url) {
             this.model.url=url;
@@ -298,7 +212,6 @@ var RecommendView = Backbone.View.extend({
             else{
                 this.render()
             }
-
         },
     previousrec: function () {
         this.model.url=this.model.get('previous')
@@ -333,8 +246,6 @@ var RecommendView = Backbone.View.extend({
                         var numb = response.Runtime.match(/\d/g);
                         numb = numb.join("");
                     }
-
-
                     movie.set('runtime', parseInt(numb));
                 };
             var movieName=movie.get('movieName').replace('+',' ');
@@ -348,25 +259,16 @@ var RecommendView = Backbone.View.extend({
                 if (parseInt(numb)<parseInt(time)){
                     var movieView = new MovieView({model: movie});
                     this.$('.recommend_view').append(movieView.render().el);
-
-
                 }
             }
             else{
                 var movieView = new MovieView({model: movie});
                 this.$('.recommend_view').append(movieView.render().el);
 
-
             }
-
-
-
-
-
             });
         },
         showMovie: function(e){
-
             var id = $(e.currentTarget).data("id");
             for (var x = 0; x<this.model.get('movies').length; x++){
                 if (this.model.get('movies')[x]['movieName']==id){
@@ -382,56 +284,28 @@ var RecommendView = Backbone.View.extend({
                         type: 'GET',
                     })
                         .done((response) => {
-
                         newModel['movieUrl']=response.Poster;
                         newModel['actors']=response.Actors;
                         newModel['plot']=response.Plot;
                         newModel['imdbRating']=response.imdbRating;
-
-
-                    console.log(newModel)
                     var rateMovieView = new RateMovieView({router:this.router,parent:this, model:newModel});
                     this.movie=rateMovieView
                     rateMovieView.render()
                 })
-
-
-
             }
         }
-
-
-
         },
-
-
-
         render: function (time) {
             this.hasRendered=true;
-            console.log(this.model.url)
             return this.model.fetch()
                     .done(()=>{
-
-
                     this.$el.html(this.template(this.model.toJSON()));
-
                     for ( var i = 0; i <this.model.get('movies').length; i++) {
-
                         this.addModel(i,time)
                     }
-
-
-
-
-
-
 });
-
 },
-
-
 });
-
 module.exports = RecommendView;
 /**
  * Created by tanle on 23.09.2016.

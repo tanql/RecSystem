@@ -132,7 +132,7 @@ $square-side: 20px;
       width: 60px;
     }
     ::-webkit-input-placeholder:-moz-placeholder::-moz-placeholder:-ms-input-placeholder {
-      color: $moods-grey1;
+      color: $my-grey1;
     }
     .intDiv {
       width: 200px;
@@ -168,6 +168,6 @@ $square-side: 20px;
   }
 }
 input.invalid {
-    background: $moods-pink2;
+    background: $my-pink2;
 }
 

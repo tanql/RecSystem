@@ -4,7 +4,6 @@ var $ = require('jquery');
 var _ = require('underscore');
 
 var LoginView = Backbone.View.extend({
-
     el: '#login_overlay',
     template: template,
     router: '',
@@ -18,10 +17,6 @@ var LoginView = Backbone.View.extend({
         this.router = params.router;
         this.model = require('../user.model');
     },
-
-
-
-
     render: function (options = {}) {
         const username = options.username || "";
         this.$el.html(this.template({username}));
@@ -30,7 +25,6 @@ var LoginView = Backbone.View.extend({
     fetchAndRender: function () {
         this.render();
 },
-
     onLogin: function (e) {
         e.preventDefault();
         $.ajax({
@@ -44,7 +38,6 @@ var LoginView = Backbone.View.extend({
                 if (response.status === 400 || response.status === 403) {
                     this.router.navigate('denied', true);
                 } else {
-                    console.log(response);
                     this.router.navigate('landing', true);
                 }
             })
@@ -52,15 +45,12 @@ var LoginView = Backbone.View.extend({
                 this.onLoginSuccess(response);
             });
     },
-
     onLoginSuccess: function (response) {
       this.$el.css('display','none');
       $('#landing').css('display','none');
       $('#content').css('display','block');
         this.model=response;
-
         sessionStorage.setItem('userId', response.userID);
-        console.log(this.model.id)
       this.router.navigate('rate', true);
     }
 });

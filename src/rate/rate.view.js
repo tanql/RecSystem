@@ -15,12 +15,9 @@ var MovieView = Backbone.View.extend({
         this.render();
     },
     render: function () {
-
-
         this.$el.html(this.template(this.model.toJSON()))
         return this;
     }
-
 
 });
 
@@ -36,21 +33,14 @@ var RateMovieView = Backbone.View.extend({
         this.parent =option.parent;
         this.hasRendered=true;
         this.model = option.model;
-
-
     },
-
 
     onClick: function(e) {
         if (this.hasRendered == true) {
-
             if (e.target.id === 'login_overlay') {
                 this.$el.css('display', 'none');
                 this.hasRendered=false;
-
                 this.router.navigate('rate', true);
-
-
             }
             else if(e.target.id=='str5' ||e.target.id=='str4'||e.target.id=='str3'||e.target.id=='str2'||e.target.id=='str1'){
 
@@ -60,24 +50,18 @@ var RateMovieView = Backbone.View.extend({
                     data: {
                         'movieId': this.model.movieId,
                         'ratingValue': e.target.value,
-
-
                     }}).done((response)=>{
                     this.$el.css('display','none');
                 this.hasRendered=false;
-
                 this.router.navigate('rate',true);
 
             })
 
         }
         }
-
-
     },
 
     render: function () {
-
         $('#login_overlay').css({'display': 'flex'});
         this.$el.html(this.template(this.model))
         return this;
@@ -97,7 +81,6 @@ var RateView = Backbone.View.extend({
             'click #next': 'next',
             'click .individualMovies': 'showMovie',
             'click #previous': 'previous',
-
             'click #search': 'search'
 
         },
@@ -113,10 +96,8 @@ var RateView = Backbone.View.extend({
             this.router.navigate('rate/?search='+this.$('#searcharea').val(),true);
             this.$('#searcharea').val('')
 
-
         },
         showMovie: function(e){
-
             var id = $(e.currentTarget).data("id");
             for (var x = 0; x<this.model.get('movies').length; x++){
                 if (this.model.get('movies')[x]['movieName']==id){
@@ -132,22 +113,13 @@ var RateView = Backbone.View.extend({
                         type: 'GET',
                     })
                         .done((response) => {
-
                     newModel['movieUrl']=response.Poster;
-
-                    console.log(newModel)
                     var rateMovieView = new RateMovieView({router:this.router,parent:this, model:newModel});
                     this.movie=rateMovieView
                     rateMovieView.render()
                 })
-
-
-
                 }
             }
-
-
-
         },
     setFalse:function(){
         this.hasRendered=false;
@@ -156,7 +128,6 @@ var RateView = Backbone.View.extend({
         next: function () {
             this.model.url=this.model.get('next')
             this.render()
-
 
         },
         previous: function () {
@@ -177,7 +148,6 @@ var RateView = Backbone.View.extend({
                 type: 'GET',
             })
                 .done((response) => {
-
                 movie.set('movieUrl',response.Poster)
             var movieName=movie.get('movieName').replace('+',' ');
 
@@ -188,43 +158,23 @@ var RateView = Backbone.View.extend({
             movie.set('movieName', movieName);
             var movieView = new MovieView({model: movie});
             this.$('.rate_view').append(movieView.render().el);
-
-
-
-
-
             });
         },
 
-
-
         render: function (url) {
-
             if(typeof url !== 'undefined'){
                 this.model.url = '/api/rate/?search='+this.$('#searcharea').val()
 
             }
-
-            console.log(this.model.url)
             return this.model.fetch()
                     .done(()=>{
             this.model.url= 'api/rate/?page=1';
-
                 this.$el.html(this.template(this.model.toJSON()));
-
                     for ( var i = 0; i <this.model.get('movies').length; i++) {
                         this.addModel(i)
                     }
-
-
-
-
-
-
 });
-
 },
-
 
 });
 

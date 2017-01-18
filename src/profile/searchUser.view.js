@@ -46,36 +46,21 @@ seeAll: function(){
 },
 
 render: function () {
-
     this.template = (this.isEditing) ? editTemplate : template;
     this.$el.html(this.template(this.getTemplateData()));
-
-
-
-
-
 },
 
 getTemplateData: function () {
     return this.model.attributes
-
 },
 
 fetchAndRender: function (id) {
     this.model.url = "/api/users/?user="+id;
     return this.model.fetch()
             .done(() => {
-
     this.render();
-
 });
 },
-
-
-
-
-
-
 });
 
 module.exports = SearchUserView;
